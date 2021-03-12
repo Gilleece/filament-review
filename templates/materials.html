@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Filament Types</title>
-</head>
-<body>
+
+{% extends "base.html" %}
+{% block content %}
+    
     {% for material in materials %}        
             {{ material.material_name}}<br>              
     {% endfor %}
-</body>
-</html>
+
+{% endblock %}
