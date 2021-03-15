@@ -6,6 +6,10 @@
     width: 4vh
 }
 
+.flashes {
+    line-height: 2;
+}
+
 /* Media Queries */
 
 @media (max-width: 767.98px) {

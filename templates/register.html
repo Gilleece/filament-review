@@ -6,26 +6,26 @@
     <h2 class="text-center mt-5">Register</h2>
 
     <div class="row justify-content-center">
-        <form class="card mt-5 col-10 col-md-8 text-white bg-primary" method="POST" action="{{ url_for('register') }}">
+        <form class="card mt-5 col-10 col-md-8 text-white bg-primary shadow p-3 mb-5 rounded needs-validation" method="POST" action="{{ url_for('register') }}" novalidate>
             <div class="card-body">
                 <!-- Username -->
                 <div class="input-group flex-nowrap">
-                    <span class="input-group-text form-icon" id="addon-wrapping"><i class="fas fa-user-plus"></i></span>
+                    <span class="input-group-text form-icon"><i class="fas fa-user-plus"></i></span>
                     <input type="text" class="form-control" id="username" name="username" placeholder="Username"
-                        aria-label="Username" aria-describedby="addon-wrapping">
+                        minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" aria-label="Username" aria-describedby="addon-wrapping" required>
                 </div>
                 <!-- Email -->
                 <div class="input-group mb-3 mt-3">
-                    <span class="input-group-text form-icon" id="inputGroup-sizing-default"><i
+                    <span class="input-group-text form-icon"><i
                             class="fas fa-envelope"></i></span>
-                    <input type="text" class="form-control" id="email" name="email" placeholder="Email"
-                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                 </div>
                 <!-- Password -->
                 <div class="input-group mb-3">
-                    <span class="input-group-text form-icon" id="inputGroup-sizing-default"><i class="fas fa-lock"></i></span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" id="password" name="password" placeholder="Password"
-                        aria-describedby="inputGroup-sizing-default">
+                    <span class="input-group-text form-icon"><i class="fas fa-lock"></i></span>
+                    <input type="password" class="form-control" aria-label="Sizing example input" id="password" name="password" placeholder="Password"
+                        minlength="5" maxlength="15" aria-describedby="inputGroup-sizing-default" required>
                 </div>
                 <!-- Submit button -->
                 <div class="text-center">
@@ -35,5 +35,7 @@
         </form>
     </div>
 </div>
+
+<script src="{{ url_for('static', filename='js/bootstrap-validator.js') }}"></script>
 
 {% endblock %}
