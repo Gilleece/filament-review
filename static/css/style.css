@@ -1,3 +1,17 @@
 .navbar {
     font-size: 150%;
 }
+
+.form-icon {
+    width: 4vh
+}
+
+/* Media Queries */
+
+@media (max-width: 767.98px) {
+
+    .form-icon {
+    width: 6vh
+    }
+
+ }
