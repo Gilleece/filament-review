@@ -35,5 +35,5 @@ class RegistrationForm(FlaskForm):
         [
             DataRequired(message="Please enter a password."),
         ]
-    )      
+    )
     submit = SubmitField('Submit')

@@ -35,7 +35,7 @@ def register():
     email = None
     password = None
     form = RegistrationForm()
-    if form.validate_on_submit():        
+    if form.validate_on_submit():
         name = form.name.data.lower()
         email = form.email.data
         password = generate_password_hash(form.password.data)
@@ -52,7 +52,7 @@ def register():
             "password": password,
             "admin": False
         }
-        mongo.db.users.insert_one(register)        
+        mongo.db.users.insert_one(register)
 
         # put the new user into session cookie
         session["user"] = name
