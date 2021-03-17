@@ -2,8 +2,16 @@
 {% extends "base.html" %}
 {% block content %}
     
-    {% for material in materials %}        
-            {{ material.material_name}}<br>              
-    {% endfor %}
-
+    <div class="container">
+        <div class="row">
+            {% for material in materials %} 
+                <div class="card m-3 text-center shadow rounded" style="width: 18rem;">
+                    <img src="{{ material.image }}" class="card-img-top material-card" alt="{{ material.material_name }} image">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary stretched-link">{{ material.material_name }}</a>                        
+                    </div>
+                </div>           
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

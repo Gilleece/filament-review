@@ -26,6 +26,7 @@ mongo = PyMongo(app)
 @app.route("/list_materials")
 def list_materials():
     materials = mongo.db.materials.find()
+    material_images = mongo.db.material_images.find()
     return render_template("materials.html", materials=materials)
 
 

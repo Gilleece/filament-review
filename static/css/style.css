@@ -10,6 +10,11 @@
     line-height: 2;
 }
 
+.material-card {
+    height: 12rem; 
+    object-fit: cover;
+}
+
 /* Media Queries */
 
 @media (max-width: 767.98px) {

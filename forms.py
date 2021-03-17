@@ -12,7 +12,8 @@ from wtforms.validators import (
     Email,
     EqualTo,
     Length,
-    URL
+    URL,
+    Regexp
 )
 
 
@@ -21,7 +22,19 @@ class RegistrationForm(FlaskForm):
     """Sign up for a user account."""
     name = StringField(
         'Username',
-        [DataRequired()]
+        [
+            DataRequired(),
+            Regexp(
+                "^[a-zA-Z0-9]{5,15}$",
+                flags=0,
+                message="Usernames may only contain letters and numbers."
+                ),
+            Length(
+                min=5,
+                max=15,
+                message="Usernames must be between 5 and 15 characters long."
+                )
+        ]
     )
     email = StringField(
         'Email',
@@ -34,6 +47,13 @@ class RegistrationForm(FlaskForm):
         'Password',
         [
             DataRequired(message="Please enter a password."),
+            EqualTo('confirmPassword', message='Passwords must match.')
+        ]
+    )
+    confirmPassword = PasswordField(
+        'Repeat Password',
+        [
+            DataRequired(message="Please enter your password again.")
         ]
     )
     submit = SubmitField('Submit')
