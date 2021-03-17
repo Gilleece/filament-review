@@ -1,41 +1,82 @@
 {% extends "base.html" %}
 {% block content %}
 
+    <section>
+        <!-- Error messages-->
+        {% if form.email.errors %}            
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="alert alert-warning alert-dismissible fade show col-6 mt-5 shadow-lg p-3 mb-5 rounded"
+                        role="alert">
+                        {% for error in form.email.errors %}
+                        <strong>{{ error }}</strong>
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>            
+        {% endif %}
+    </section>
+
 <div class="container">
 
     <h2 class="text-center mt-5">Register</h2>
 
     <div class="row justify-content-center">
-        <form class="card mt-5 col-10 col-md-8 text-white bg-primary shadow p-3 mb-5 rounded needs-validation" method="POST" action="{{ url_for('register') }}" novalidate>
+        <form class="card mt-5 col-10 col-md-8 text-white bg-primary shadow p-3 mb-5 rounded" method="POST" action="{{ url_for('register') }}">
+            {{ form.hidden_tag() }}
             <div class="card-body">
                 <!-- Username -->
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text form-icon"><i class="fas fa-user-plus"></i></span>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Username"
-                        minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" aria-label="Username" aria-describedby="addon-wrapping" required>
+                    {{ form.name(class_='form-control') }}
                 </div>
                 <!-- Email -->
                 <div class="input-group mb-3 mt-3">
                     <span class="input-group-text form-icon"><i
                             class="fas fa-envelope"></i></span>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email"
-                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                    {{ form.email(class_='form-control') }}
                 </div>
                 <!-- Password -->
                 <div class="input-group mb-3">
                     <span class="input-group-text form-icon"><i class="fas fa-lock"></i></span>
-                    <input type="password" class="form-control" aria-label="Sizing example input" id="password" name="password" placeholder="Password"
-                        minlength="5" maxlength="15" aria-describedby="inputGroup-sizing-default" required>
+                    {{ form.password(class_='form-control') }}
                 </div>
                 <!-- Submit button -->
                 <div class="text-center">
-                    <button type="submit" class="btn btn-success">Sign Up <i class="fas fa-sign-in-alt"></i></button>
+                    <div>{{ form.submit(class_='btn btn-success') }} <i class="fas fa-sign-in-alt"></i></div>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-<script src="{{ url_for('static', filename='js/bootstrap-validator.js') }}"></script>
+    <!--<h2>FORM WTF</h2>
 
-{% endblock %}
+    <div class="form-wrapper">
+        <h2 class="title">Register</h2>
+
+        <form method="POST" action="{{ url_for('register') }}">
+
+            <fieldset class="form-field">
+                
+            </fieldset>
+
+            <fieldset class="form-field">
+                
+            </fieldset>
+
+            <fieldset class="form-field">
+                
+            </fieldset>
+
+            <fieldset class="form-field">
+                {{ form.confirmPassword }}
+            </fieldset>
+
+            {{ form.submit }}
+
+        </form>
+    </div>-->
+
+    {% endblock %}
