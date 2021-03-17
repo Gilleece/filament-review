@@ -52,18 +52,9 @@
                                 Materials
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">PLA</a></li>
-                                <li><a class="dropdown-item" href="#">ABS</a></li>
-                                <li><a class="dropdown-item" href="#">TPU</a></li>
-                                <li><a class="dropdown-item" href="#">HIPS</a></li>
-                                <li><a class="dropdown-item" href="#">PETG</a></li>
-                                <li><a class="dropdown-item" href="#">Nylon</a></li>
-                                <li><a class="dropdown-item" href="#">Carbon Fiber</a></li>
-                                <li><a class="dropdown-item" href="#">ASA</a></li>
-                                <li><a class="dropdown-item" href="#">Polycarbonate</a></li>
-                                <li><a class="dropdown-item" href="#">Metal</a></li>
-                                <li><a class="dropdown-item" href="#">Wood</a></li>
-                                <li><a class="dropdown-item" href="#">PVA</a></li>
+                                {% for material in materials %}
+                                <li><a class="dropdown-item" href="#">{{ material.material_name }}</a></li>                                
+                                {% endfor %}
                             </ul>
                         </li>
                         <li class="nav-item">
