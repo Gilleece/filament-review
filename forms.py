@@ -4,7 +4,6 @@ from wtforms import (
     TextAreaField,
     SubmitField,
     PasswordField,
-    DateField,
     SelectField
 )
 from wtforms.validators import (
@@ -12,7 +11,6 @@ from wtforms.validators import (
     Email,
     EqualTo,
     Length,
-    URL,
     Regexp
 )
 
@@ -54,6 +52,23 @@ class RegistrationForm(FlaskForm):
         'Repeat Password',
         [
             DataRequired(message="Please enter your password again.")
+        ]
+    )
+    submit = SubmitField('Submit')
+
+
+class loginForm(FlaskForm):
+    """Log in to existing account."""
+    name = StringField(
+        'Username',
+        [
+            DataRequired()
+        ]
+    )
+    password = PasswordField(
+        'Password',
+        [
+            DataRequired()
         ]
     )
     submit = SubmitField('Submit')

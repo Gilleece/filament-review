@@ -5,7 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegistrationForm
+from forms import RegistrationForm, loginForm
 from extensions import csrf
 if os.path.exists("env.py"):
     import env
@@ -62,6 +62,40 @@ def register():
         form=form,
         name=name,
         email=email,
+        password=password
+    )
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    name = None
+    password = None
+    form = loginForm()
+    if form.validate_on_submit():
+        name = form.name.data.lower()
+        password = form.password.data
+        # check if username exists in db
+        existing_user = mongo.db.users.find_one({"username": name})
+
+        if existing_user:
+            # check password
+            if check_password_hash(existing_user["password"], password):
+                session["user"] = name
+                flash("Sucessfully logged in!")
+            else:
+                # invalid password
+                flash("Incorrect Username and/or Password")
+                return redirect(url_for("login"))
+
+        else:
+            # username doesn't exist
+            flash("Incorrect Username and/or Password")
+            return redirect(url_for("login"))
+
+    return render_template(
+        "login.html",
+        form=form,
+        name=name,
         password=password
     )
 
