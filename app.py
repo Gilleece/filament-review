@@ -123,6 +123,12 @@ def logout():
     return redirect(url_for("login"))
 
 
+@app.route("/pla")
+def pla():
+    reviews = mongo.db.reviews.find()
+    return render_template("materials/pla.html", reviews=reviews)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

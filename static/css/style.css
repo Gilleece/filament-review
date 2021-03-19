@@ -15,6 +15,11 @@
     object-fit: cover;
 }
 
+.review-image {
+    height: 33vh;
+    object-fit: contain;
+}
+
 /* Media Queries */
 
 @media (max-width: 767.98px) {
