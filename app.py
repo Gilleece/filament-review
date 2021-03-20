@@ -135,6 +135,66 @@ def abs():
     return render_template("materials/abs.html", reviews=reviews)
 
 
+@app.route("/asa")
+def asa():
+    reviews = mongo.db.reviews.find()
+    return render_template("materials/asa.html", reviews=reviews)
+
+
+@app.route("/carbon")
+def carbon():
+    reviews = mongo.db.reviews.find()
+    return render_template("materials/carbon.html", reviews=reviews)
+
+
+@app.route("/hips")
+def hips():
+    reviews = mongo.db.reviews.find()
+    return render_template("materials/hips.html", reviews=reviews)
+
+
+@app.route("/metal")
+def metal():
+    reviews = mongo.db.reviews.find()
+    return render_template("materials/metal.html", reviews=reviews)
+
+
+@app.route("/nylon")
+def nylon():
+    reviews = mongo.db.reviews.find()
+    return render_template("materials/nylon.html", reviews=reviews)
+
+
+@app.route("/petg")
+def petg():
+    reviews = mongo.db.reviews.find()
+    return render_template("materials/petg.html", reviews=reviews)
+
+
+@app.route("/polycarbonate")
+def polycarbonate():
+    reviews = mongo.db.reviews.find()
+    return render_template("materials/polycarbonate.html", reviews=reviews)
+
+@app.route("/pva")
+def pva():
+    reviews = mongo.db.reviews.find()
+    return render_template("materials/pva.html", reviews=reviews)
+
+
+@app.route("/tpu")
+def tpu():
+    reviews = mongo.db.reviews.find()
+    return render_template("materials/tpu.html", reviews=reviews)
+
+
+@app.route("/wood")
+def wood():
+    reviews = mongo.db.reviews.find()
+    return render_template("materials/wood.html", reviews=reviews)
+    
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

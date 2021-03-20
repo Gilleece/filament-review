@@ -7,7 +7,7 @@
                 <div class="card m-3 text-center shadow rounded" style="width: 18rem;">
                     <img src="{{ material.image }}" class="card-img-top material-card" alt="{{ material.material_name }} image">
                     <div class="card-body">                        
-                        <a href="{{ url_for('pla') }}" class="btn btn-primary stretched-link">{{ material.material_name }}</a>                        
+                        <a href="{{ material.path }}" class="btn btn-primary stretched-link">{{ material.material_name }}</a>                        
                     </div>
                 </div>           
             {% endfor %}
