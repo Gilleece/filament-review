@@ -57,16 +57,16 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">                                
                                 <li><a class="dropdown-item" href="{{ url_for('pla') }}">PLA</a></li>                              
                                 <li><a class="dropdown-item" href="{{ url_for('abs') }}">ABS</a></li>                              
-                                <li><a class="dropdown-item" href="#">TPU</a></li>                              
-                                <li><a class="dropdown-item" href="#">HIPS</a></li>                              
-                                <li><a class="dropdown-item" href="#">PETG</a></li>                              
-                                <li><a class="dropdown-item" href="#">Nylon</a></li>                              
-                                <li><a class="dropdown-item" href="#">Carbon Fiber</a></li>                              
-                                <li><a class="dropdown-item" href="#">ASA</a></li>                              
-                                <li><a class="dropdown-item" href="#">Polycarbonate</a></li>                              
-                                <li><a class="dropdown-item" href="#">Metal</a></li>                              
-                                <li><a class="dropdown-item" href="#">Wood</a></li>                              
-                                <li><a class="dropdown-item" href="#">PVA</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('tpu') }}">TPU</a></li>                              
+                                <li><a class="dropdown-item" href="{{ url_for('hips') }}">HIPS</a></li>                              
+                                <li><a class="dropdown-item" href="{{ url_for('petg') }}">PETG</a></li>                              
+                                <li><a class="dropdown-item" href="{{ url_for('nylon') }}">Nylon</a></li>                              
+                                <li><a class="dropdown-item" href="{{ url_for('carbon') }}">Carbon Fiber</a></li>                              
+                                <li><a class="dropdown-item" href="{{ url_for('asa') }}">ASA</a></li>                              
+                                <li><a class="dropdown-item" href="{{ url_for('polycarbonate') }}">Polycarbonate</a></li>                              
+                                <li><a class="dropdown-item" href="{{ url_for('metal') }}">Metal</a></li>                              
+                                <li><a class="dropdown-item" href="{{ url_for('wood') }}">Wood</a></li>                              
+                                <li><a class="dropdown-item" href="{{ url_for('pva') }}">PVA</a></li>
                             </ul>
                         </li>
                         {% if session.user %}
