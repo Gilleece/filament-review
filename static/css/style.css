@@ -1,3 +1,5 @@
+/***** General Styles *****/
+
 .navbar {
     font-size: 150%;
 }
@@ -15,12 +17,54 @@
     object-fit: cover;
 }
 
+/***** Review Card Styles *****/
+
 .review-image {
     height: 33vh;
     object-fit: contain;
 }
 
-/* Media Queries */
+.review-card {
+    min-height: 66vh;
+}
+
+.fa-thumbs-up{
+    font-size: 200%;
+    color: #0d6efd;
+}
+
+.rainbow-gradient {
+    background: red;
+    background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
+    background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+    background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+    background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;    
+}
+
+.glow {  
+  font-size: 75%;
+  color: black;
+  text-shadow: 0 0 1px #fff, 0 0 1px #ff4da6, 0 0 2px #ff4da6, 0 0 3px #ff4da6, 0 0 4px #ff4da6, 0 0 5px #ff4da6, 0 0 6px #ff4da6;
+}
+
+.goodstar {
+    color: gold;
+}
+
+.badstar {
+    color: grey;
+}
+
+.thermometer {
+    color: red;
+}
+
+.money {
+    color: green;
+}
+/***** Media Queries *****/
 
 @media (max-width: 767.98px) {
 
@@ -29,3 +73,17 @@
     }
 
  }
+
+ /***** Animations *****/
+
+.fa-thumbs-up:hover{ 
+  animation: pulse 1s infinite;
+  animation-timing-function: linear;   
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+  }
+}
