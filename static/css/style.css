@@ -40,6 +40,7 @@
     background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
     background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;    
 }
 
@@ -86,4 +87,4 @@
   50% { transform: scale(1.1); }
   100% { transform: scale(1); }
   }
-}
+

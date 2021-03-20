@@ -129,6 +129,12 @@ def pla():
     return render_template("materials/pla.html", reviews=reviews)
 
 
+@app.route("/abs")
+def abs():
+    reviews = mongo.db.reviews.find()
+    return render_template("materials/abs.html", reviews=reviews)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
