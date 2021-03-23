@@ -1,5 +1,10 @@
 /***** General Styles *****/
 
+.main-container {
+    background-image: url('../images/graph_tile.jpg');
+    background-repeat: repeat;
+}
+
 .navbar {
     font-size: 150%;
 }
