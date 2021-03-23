@@ -4,6 +4,8 @@ from wtforms import (
     TextAreaField,
     SubmitField,
     PasswordField,
+    SelectField,
+    IntegerField,
     SelectField
 )
 from wtforms.validators import (
@@ -72,3 +74,91 @@ class loginForm(FlaskForm):
         ]
     )
     submit = SubmitField('Submit')
+
+
+class ReviewForm(FlaskForm):
+    """Sign up for a user account."""
+    material_name = SelectField(
+        'Filament type',
+        [DataRequired()],
+        choices=[
+            ('ABS', 'ABS'),
+            ('ASA', 'ASA'),
+            ('Carbon', 'Carbon Fiber'),
+            ('HIPS', 'HIPS'),
+            ('Metal', 'Metal'),
+            ('Nylon', 'Nylon'),
+            ('PETG', 'PETG'),
+            ('PLA', 'PLA'),
+            ('Polycarbonate', 'Polycarbonate'),
+            ('PVA', 'PVA'),
+            ('TPU', 'TPU'),
+            ('Wood', 'Wood')
+        ]
+    )
+    brand = StringField(
+        'Made by',
+        [DataRequired()]
+    )
+    filament_name = StringField(
+        'Filament name',
+        [DataRequired()]
+    )
+    rating = SelectField(
+        'Overall rating (1 = Terrible)',
+        [DataRequired()],
+        choices=[
+            ('1'),
+            ('2'),
+            ('3'),
+            ('4'),
+            ('5')
+        ]
+    )
+    cost = SelectField(
+        'Cost (1 = cheap)',
+        [DataRequired()],
+        choices=[
+            ('1'),
+            ('2'),
+            ('3')
+        ]
+    )
+    temp = IntegerField(
+        'Printing Temperature',
+        [DataRequired()]
+    )
+    colour = StringField(
+        'Colour',
+        [DataRequired()]
+    )
+    finish = SelectField(
+        'Finish',
+        [DataRequired()],
+        choices=[
+            ('Standard'),
+            ('Matte'),
+            ('Silk'),
+            ('Satin'),
+            ('Glitter'),
+            ('Glow in the dark'),
+            ('Other')
+        ]
+    )
+    review = StringField(
+        'Review text',
+        [
+            DataRequired(),
+            Length(
+                min=15,
+                max=250,
+                message="Please keep reviews short and concise (250 char max)."
+                )
+        ]
+    )
+    image = StringField(
+        'Image URL',
+        [DataRequired(message="Need to upload an image? Try Imgur!")]
+    )
+    submit = SubmitField('Submit')
+

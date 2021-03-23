@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <section>
+        <!-- Error Messages-->
+
+        <!-- Username Input Errors -->
+        {% if form.review.errors %}            
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="alert alert-warning alert-dismissible fade show col-6 mt-5 shadow-lg p-3 mb-5 rounded"
+                        role="alert">
+                        {% for error in form.review.errors %}
+                        <strong>{{ error }}</strong><br>
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>            
+        {% endif %}
+
+        <!-- Email Input Errors -->
+        {% if form.image.errors %}            
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="alert alert-warning alert-dismissible fade show col-6 mt-5 shadow-lg p-3 mb-5 rounded"
+                        role="alert">
+                        {% for error in form.image.errors %}
+                        <strong>{{ error }}</strong>
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>            
+        {% endif %}
+    </section>
+
+<div class="container">
+
+    <h2 class="text-center mt-5">Add Review</h2>
+
+    <div class="row justify-content-center">
+        <form class="card mt-5 col-10 col-md-8 text-white bg-primary shadow p-3 mb-5 rounded" method="POST" action="{{ url_for('add_review') }}">
+            {{ form.hidden_tag() }}
+            <div class="card-body">
+                <!-- Material Name -->
+                <h6>Filament type: </h6>
+                <div class="input-group flex-nowrap">                    
+                    {{ form.material_name(class_='form-control', placeholder='Filament Type') }}
+                </div>  
+                <!-- Brand -->
+                <h6>Filament Maker:</h6>
+                <div class="input-group flex-nowrap">                    
+                    {{ form.brand(class_='form-control', placeholder='Filament Maker') }}
+                </div>   
+                <!-- Filament Name -->
+                <h6>Filament Name:</h6>
+                <div class="input-group flex-nowrap">                    
+                    {{ form.filament_name(class_='form-control', placeholder='Filament Name') }}
+                </div> 
+                <!-- rating -->
+                <h6>Rating (1 = Bad):</h6>
+                <div class="input-group flex-nowrap">                    
+                    {{ form.rating(class_='form-control', placeholder='Rating (1 = Bad)') }}
+                </div> 
+                <!-- Cost -->
+                <h6>Cost (1 = Cheap):</h6>
+                <div class="input-group flex-nowrap">                    
+                    {{ form.cost(class_='form-control', placeholder='Cost (1 = Cheap)') }}
+                </div> 
+                <!-- Temperature -->
+                <h6>Temperature you printed:</h6>
+                <div class="input-group flex-nowrap">                    
+                    {{ form.temp(class_='form-control', placeholder='Printing Temperature') }}
+                </div> 
+                <!-- Colour -->
+                <h6>Colour:</h6>
+                <div class="input-group flex-nowrap">                    
+                    {{ form.colour(class_='form-control', placeholder='Filament Colour') }}
+                </div> 
+                <!-- Finish -->
+                <h6>Finish:</h6>
+                <div class="input-group flex-nowrap">                    
+                    {{ form.finish(class_='form-control', placeholder='Filament Finish') }}
+                </div> 
+                <h6>Review Text:</h6>
+                <!-- Review Text -->
+                <div class="input-group flex-nowrap">                    
+                    {{ form.review(class_='form-control', placeholder='Review Text (Max 250 characters)') }}
+                </div> 
+                <!-- Image -->
+                <h6>Image URL:</h6>
+                <div class="input-group flex-nowrap mb-3">
+                    {{ form.image(class_='form-control', placeholder='Image URL of a print') }}
+                </div>             
+                <!-- Submit button -->
+                <div class="text-center">
+                    <div>{{ form.submit(class_='btn btn-success') }} <i class="fas fa-sign-in-alt"></i></div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+</div>
+   
+
+{% endblock %}

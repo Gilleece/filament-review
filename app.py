@@ -5,7 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegistrationForm, loginForm
+from forms import RegistrationForm, loginForm, ReviewForm
 from extensions import csrf
 if os.path.exists("env.py"):
     import env
@@ -100,6 +100,65 @@ def login():
         form=form,
         name=name,
         password=password
+    )
+
+
+@app.route("/add_review", methods=["GET", "POST"])
+def add_review():
+    material_name = None
+    brand = None
+    filament_name = None
+    rating = None
+    cost = None
+    temp = None
+    colour = None
+    finish = None
+    review = None
+    image = None
+    form = ReviewForm()
+    if form.validate_on_submit():
+        material_name = form.material_name.data
+        brand = form.brand.data
+        filament_name = form.filament_name.data
+        rating = int(form.rating.data)
+        cost = int(form.cost.data)
+        temp = form.temp.data
+        finish = form.finish.data
+        colour = form.colour.data
+        review = form.review.data
+        image = form.image.data
+
+        review = {
+            "material_name": material_name,
+            "brand": brand,
+            "filament_name": filament_name,
+            "author": session["user"],
+            "rating": rating,
+            "temperature": temp,
+            "finish": finish,
+            "colour": colour,
+            "review_text": review,
+            "image_url": image,
+            "cost": cost,
+            "likes": 0
+        }
+        mongo.db.reviews.insert_one(review)
+        flash("Thanks for your review!")
+        return redirect(url_for("add_review"))
+
+    return render_template(
+        "add_review.html",
+        form=form,
+        material_name=material_name,
+        brand=brand,
+        filament_name=filament_name,
+        rating=rating,
+        cost=cost,
+        temp=temp,
+        colour=colour,
+        finish=finish,
+        review=review,
+        image=image,
     )
 
 
