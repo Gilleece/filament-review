@@ -115,10 +115,10 @@
                         <!-- Edit/Delete Button for user reviews-->
                         <div class="row justify-content-center">
                             <div class="col-3">
-                                <button type="button" class="btn btn-outline-primary">Edit</button>
+                                <a href="{{ url_for('edit_review', review_id=review._id) }}" type="button" class="btn btn-outline-primary">Edit</a>
                             </div>
                             <div class="col-3">
-                                <button type="button" class="btn btn-outline-danger">Delete</button>
+                                <a href="#" type="button" class="btn btn-outline-danger">Delete</a>
                             </div>
                         </div>
                     </div>                    
