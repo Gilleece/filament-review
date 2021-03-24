@@ -164,7 +164,8 @@ def add_review():
 
 @app.route("/edit_review/<review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
-    review_to_edit = mongo.db.tasks.find_one({"_id": ObjectId(review_id)})
+    review_to_edit = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+    form = ReviewForm()
     material_name = None
     brand = None
     filament_name = None
@@ -175,7 +176,17 @@ def edit_review(review_id):
     finish = None
     review = None
     image = None
-    form = ReviewForm()
+    # Fill form with data from the user's review
+    form.material_name.data = review_to_edit['material_name']
+    form.brand.data = review_to_edit['brand']
+    form.filament_name.data = review_to_edit['filament_name']
+    form.rating.data = str(review_to_edit['rating'])
+    form.cost.data = str(review_to_edit['cost'])
+    form.temp.data = review_to_edit['temperature']
+    form.colour.data = review_to_edit['colour']
+    form.finish.data = review_to_edit['finish']
+    form.review.data = review_to_edit['review_text']
+    form.image.data = review_to_edit['image_url']
     if form.validate_on_submit():
         material_name = form.material_name.data
         brand = form.brand.data
@@ -203,7 +214,7 @@ def edit_review(review_id):
             "likes": 0
         }
         mongo.db.reviews.insert_one(updated_review)
-        flash("Thanks for your review!")
+        flash("Thanks for updating your review!")
         return redirect(url_for("edit_review"))
 
     return render_template(
@@ -219,7 +230,7 @@ def edit_review(review_id):
         finish=finish,
         review=review,
         image=image,
-        review_to_edit = review_to_edit
+        review_to_edit=review_to_edit
     )
 
 

@@ -92,15 +92,19 @@
                 <h6>Image URL:</h6>
                 <div class="input-group flex-nowrap mb-3">
                     {{ form.image(class_='form-control', placeholder='Image URL of a print') }}
-                </div>             
-                <!-- Submit button -->
-                <div class="text-center">
-                    <div>{{ form.submit(class_='btn btn-success') }} <i class="fas fa-sign-in-alt"></i></div>
-                </div>
-            </div>
+                </div>  
+                <div class="row text-center">                                            
+                <!-- Cancel and Submit button -->
+                <div class="text-center">                    
+                    <div>
+                        <a class="btn btn-secondary" role="button" href="{{ url_for('profile', username=session['user']) }}" >Cancel</a>
+                        {{ form.submit(class_='btn btn-success') }}
+                    </div>
+                </div>  
+                </div>                              
+            </div>            
         </form>
-    </div>
-    
+    </div>    
 </div>
    
 
