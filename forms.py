@@ -77,7 +77,7 @@ class loginForm(FlaskForm):
 
 
 class ReviewForm(FlaskForm):
-    """Sign up for a user account."""
+    """Form for submitting a review"""
     material_name = SelectField(
         'Filament type',
         [DataRequired()],
@@ -150,13 +150,98 @@ class ReviewForm(FlaskForm):
         [
             DataRequired(),
             Length(
-                min=15,
                 max=250,
                 message="Please keep reviews short and concise (250 char max)."
                 )
         ]
     )
     image = StringField(
+        'Image URL',
+        [DataRequired(message="Need to upload an image? Try Imgur!")]
+    )
+    submit = SubmitField('Submit')
+
+
+class EditForm(FlaskForm):
+    """Form for editing a review"""
+    material_name = SelectField(
+        'Filament type',
+        [DataRequired()],
+        choices=[
+            ('ABS', 'ABS'),
+            ('ASA', 'ASA'),
+            ('Carbon', 'Carbon Fiber'),
+            ('HIPS', 'HIPS'),
+            ('Metal', 'Metal'),
+            ('Nylon', 'Nylon'),
+            ('PETG', 'PETG'),
+            ('PLA', 'PLA'),
+            ('Polycarbonate', 'Polycarbonate'),
+            ('PVA', 'PVA'),
+            ('TPU', 'TPU'),
+            ('Wood', 'Wood')
+        ]
+    )
+    brand = StringField(
+        'Made by',
+        [DataRequired()]
+    )
+    filament_name = StringField(
+        'Filament name',
+        [DataRequired()]
+    )
+    rating = SelectField(
+        'Overall rating (1 = Terrible)',
+        [DataRequired()],
+        choices=[
+            ('1'),
+            ('2'),
+            ('3'),
+            ('4'),
+            ('5')
+        ]
+    )
+    cost = SelectField(
+        'Cost (1 = cheap)',
+        [DataRequired()],
+        choices=[
+            ('1'),
+            ('2'),
+            ('3')
+        ]
+    )
+    temperature = IntegerField(
+        'Printing Temperature',
+        [DataRequired()]
+    )
+    colour = StringField(
+        'Colour',
+        [DataRequired()]
+    )
+    finish = SelectField(
+        'Finish',
+        [DataRequired()],
+        choices=[
+            ('Standard'),
+            ('Matte'),
+            ('Silk'),
+            ('Satin'),
+            ('Glitter'),
+            ('Glow in the dark'),
+            ('Other')
+        ]
+    )
+    review_text = StringField(
+        'Review text',
+        [
+            DataRequired(),
+            Length(
+                max=250,
+                message="Please keep reviews short and concise (250 char max)."
+                )
+        ]
+    )
+    image_url = StringField(
         'Image URL',
         [DataRequired(message="Need to upload an image? Try Imgur!")]
     )

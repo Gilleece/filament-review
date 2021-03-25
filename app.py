@@ -5,7 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegistrationForm, loginForm, ReviewForm
+from forms import RegistrationForm, loginForm, ReviewForm, EditForm
 from extensions import csrf
 if os.path.exists("env.py"):
     import env
@@ -144,7 +144,7 @@ def add_review():
         }
         mongo.db.reviews.insert_one(review)
         flash("Thanks for your review!")
-        return redirect(url_for("add_review"))
+        return redirect(url_for("add_review"))    
 
     return render_template(
         "add_review.html",
@@ -165,7 +165,7 @@ def add_review():
 @app.route("/edit_review/<review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
     review_to_edit = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
-    form = ReviewForm()
+    form = EditForm(**review_to_edit)
     material_name = None
     brand = None
     filament_name = None
@@ -176,46 +176,38 @@ def edit_review(review_id):
     finish = None
     review = None
     image = None
-    # Fill form with data from the user's review
-    form.material_name.data = review_to_edit['material_name']
-    form.brand.data = review_to_edit['brand']
-    form.filament_name.data = review_to_edit['filament_name']
-    form.rating.data = str(review_to_edit['rating'])
-    form.cost.data = str(review_to_edit['cost'])
-    form.temp.data = review_to_edit['temperature']
-    form.colour.data = review_to_edit['colour']
-    form.finish.data = review_to_edit['finish']
-    form.review.data = review_to_edit['review_text']
-    form.image.data = review_to_edit['image_url']
-    if form.validate_on_submit():
-        material_name = form.material_name.data
-        brand = form.brand.data
-        filament_name = form.filament_name.data
-        rating = int(form.rating.data)
-        cost = int(form.cost.data)
-        temp = form.temp.data
-        finish = form.finish.data
-        colour = form.colour.data
-        review = form.review.data
-        image = form.image.data
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            material_name = form.material_name.data
+            brand = form.brand.data
+            filament_name = form.filament_name.data
+            rating = int(form.rating.data)
+            cost = int(form.cost.data)
+            temp = form.temperature.data
+            finish = form.finish.data
+            colour = form.colour.data
+            review = form.review_text.data
+            image = form.image_url.data
 
-        updated_review = {
-            "material_name": material_name,
-            "brand": brand,
-            "filament_name": filament_name,
-            "author": session["user"],
-            "rating": rating,
-            "temperature": temp,
-            "finish": finish,
-            "colour": colour,
-            "review_text": review,
-            "image_url": image,
-            "cost": cost,
-            "likes": 0
-        }
-        mongo.db.reviews.insert_one(updated_review)
-        flash("Thanks for updating your review!")
-        return redirect(url_for("edit_review"))
+            updated_review = {
+                "material_name": material_name,
+                "brand": brand,
+                "filament_name": filament_name,
+                "author": session["user"],
+                "rating": rating,
+                "temperature": temp,
+                "finish": finish,
+                "colour": colour,
+                "review_text": review,
+                "image_url": image,
+                "cost": cost,
+                "likes": 0
+            }
+            mongo.db.reviews.update(
+                {"_id": ObjectId(review_id)}, updated_review)
+            flash("Review successfully updated.")
+            return redirect(url_for(
+                    "profile", username=session["user"]))
 
     return render_template(
         "edit_review.html",
@@ -230,6 +222,7 @@ def edit_review(review_id):
         finish=finish,
         review=review,
         image=image,
+        review_id=review_id,
         review_to_edit=review_to_edit
     )
 
@@ -242,7 +235,8 @@ def profile(username):
         {"username": session["user"]})["username"]
 
     if session["user"]:
-        return render_template("profile.html", username=username, reviews=reviews)
+        return render_template(
+            "profile.html", username=username, reviews=reviews)
 
     return redirect(url_for("login"))
 

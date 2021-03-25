@@ -5,12 +5,12 @@
         <!-- Error Messages-->
 
         <!-- Username Input Errors -->
-        {% if form.review.errors %}            
+        {% if form.review_text.errors %}            
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="alert alert-warning alert-dismissible fade show col-6 mt-5 shadow-lg p-3 mb-5 rounded"
                         role="alert">
-                        {% for error in form.review.errors %}
+                        {% for error in form.review_type.errors %}
                         <strong>{{ error }}</strong><br>
                         {% endfor %}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -20,7 +20,7 @@
         {% endif %}
 
         <!-- Email Input Errors -->
-        {% if form.image.errors %}            
+        {% if form.image_url.errors %}            
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="alert alert-warning alert-dismissible fade show col-6 mt-5 shadow-lg p-3 mb-5 rounded"
@@ -40,7 +40,7 @@
     <h2 class="text-center mt-5">Edit Review</h2>
 
     <div class="row justify-content-center">
-        <form class="card mt-5 col-10 col-md-8 text-white bg-primary shadow p-3 mb-5 rounded" method="POST" action="{{ url_for('edit_review', review_id=review._id) }}">
+        <form class="card mt-5 col-10 col-md-8 text-white bg-primary shadow p-3 mb-5 rounded" method="POST" action="{{ url_for('edit_review', review_id=review_to_edit._id) }}">
             {{ form.hidden_tag() }}
             <div class="card-body">
                 <!-- Material Name -->
@@ -71,7 +71,7 @@
                 <!-- Temperature -->
                 <h6>Temperature you printed:</h6>
                 <div class="input-group flex-nowrap">                    
-                    {{ form.temp(class_='form-control', placeholder='Printing Temperature') }}
+                    {{ form.temperature(class_='form-control', placeholder='Printing Temperature') }}
                 </div> 
                 <!-- Colour -->
                 <h6>Colour:</h6>
@@ -86,12 +86,12 @@
                 <h6>Review Text:</h6>
                 <!-- Review Text -->
                 <div class="input-group flex-nowrap">                    
-                    {{ form.review(class_='form-control', placeholder='Review Text (Max 250 characters)') }}
+                    {{ form.review_text(class_='form-control', placeholder='Review Text (Max 250 characters)') }}
                 </div> 
                 <!-- Image -->
                 <h6>Image URL:</h6>
                 <div class="input-group flex-nowrap mb-3">
-                    {{ form.image(class_='form-control', placeholder='Image URL of a print') }}
+                    {{ form.image_url(class_='form-control', placeholder='Image URL of a print') }}
                 </div>  
                 <div class="row text-center">                                            
                 <!-- Cancel and Submit button -->
