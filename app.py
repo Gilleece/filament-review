@@ -239,6 +239,14 @@ def edit_review(review_id):
     )
 
 
+@app.route("/delete_review/<review_id>")
+def delete_review(review_id):
+    mongo.db.reviews.remove({"_id": ObjectId(review_id)})
+    flash("Review Sucessfully Deleted")
+    return redirect(url_for(
+                    "profile", username=session["user"]))
+
+
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # grab the session user's username from db

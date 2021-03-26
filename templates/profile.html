@@ -116,11 +116,31 @@
                                 <a href="{{ url_for('edit_review', review_id=review._id) }}" type="button" class="btn btn-outline-primary">Edit</a>
                             </div>
                             <div class="col-3">
-                                <a href="#" type="button" class="btn btn-outline-danger">Delete</a>
+                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteReview{{review._id}}">
+                                Delete
+                                </button>
                             </div>
                         </div>
                     </div>                    
-                </div>                
+                </div>  
+                <!-- Delete Review Modal -->
+                <div class="modal fade" id="deleteReview{{review._id}}" name="deleteReview{{review._id}}" tabindex="-1" aria-labelledby="DeleteReviewModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Review</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <a href="{{ url_for('delete_review', review_id=review._id) }}" type="button" class="btn btn-primary">Delete</a>
+                    </div>
+                    </div>
+                </div>
+                </div>              
             {% endif %}
         {% endfor %}
     </div>
