@@ -247,3 +247,17 @@ class EditForm(FlaskForm):
     )
     submit = SubmitField('Submit')
 
+
+class SearchForm(FlaskForm):
+    """Search Reviews"""
+    query = StringField(
+        'Search Query',
+        [
+            DataRequired(),
+            Length(
+                min=3,
+                message="Minimum length of search is 3 characters."
+                )
+        ]
+    )
+    submit = SubmitField('Search')

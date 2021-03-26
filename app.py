@@ -5,7 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegistrationForm, loginForm, ReviewForm, EditForm
+from forms import RegistrationForm, loginForm, ReviewForm, EditForm, SearchForm
 from extensions import csrf
 if os.path.exists("env.py"):
     import env
@@ -272,6 +272,23 @@ def logout():
 @app.route("/admin_tools")
 def admin_tools():    
     return render_template("admin_tools.html")
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = None
+    reviews = list(mongo.db.reviews.find({"$text": {"$search": ""}}))
+    form = SearchForm()
+    if form.validate_on_submit():
+        query = form.query.data
+        reviews = list(mongo.db.reviews.find({"$text": {"$search": query}}))
+
+    return render_template(
+        "search.html",
+        form=form,
+        query=query,
+        reviews=reviews
+        )
 
 
 # Below are the app routes for each individual filament section
