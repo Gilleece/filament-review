@@ -24,12 +24,14 @@ mongo = PyMongo(app)
 
 @app.route("/")
 @app.route("/list_materials")
+# Show list of materials on index/materials page
 def list_materials():
     materials = mongo.db.materials.find()
     return render_template("materials.html", materials=materials)
 
 
 @app.route("/register", methods=["GET", "POST"])
+# User registration functionality
 def register():
     name = None
     email = None
@@ -42,10 +44,12 @@ def register():
         existing_user = mongo.db.users.find_one(
             {"username": name})
 
+        # Check if username is taken
         if existing_user:
             flash("Username already taken :(")
             return redirect(url_for("register"))
 
+        # Add account to mongoDB
         register = {
             "username": name,
             "email": email,
@@ -54,7 +58,7 @@ def register():
         }
         mongo.db.users.insert_one(register)
 
-        # put the new user into session cookie
+        # Put the new user into session cookie
         session["user"] = name
         flash("Thank you for signing up!")
         return redirect(url_for("profile", username=session["user"]))
@@ -69,6 +73,7 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    # Log In functionality
     name = None
     password = None
     form = loginForm()
@@ -105,6 +110,7 @@ def login():
 
 @app.route("/add_review", methods=["GET", "POST"])
 def add_review():
+    # Add review functionality
     material_name = None
     brand = None
     filament_name = None
@@ -117,6 +123,7 @@ def add_review():
     image = None
     form = ReviewForm()
     if form.validate_on_submit():
+        # Assign all parts of the form to variables
         material_name = form.material_name.data
         brand = form.brand.data
         filament_name = form.filament_name.data
@@ -128,6 +135,7 @@ def add_review():
         review = form.review.data
         image = form.image.data
 
+        # Add review to mongoDB
         review = {
             "material_name": material_name,
             "brand": brand,
@@ -164,7 +172,9 @@ def add_review():
 
 @app.route("/edit_review/<review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
+    # Edit review functionality
     review_to_edit = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+    # Pass the existing review through to populate the form
     form = EditForm(**review_to_edit)
     material_name = None
     brand = None
@@ -178,6 +188,7 @@ def edit_review(review_id):
     image = None
     if request.method == 'POST':
         if form.validate_on_submit():
+            # Assign all parts of the form to variables
             material_name = form.material_name.data
             brand = form.brand.data
             filament_name = form.filament_name.data
@@ -189,6 +200,7 @@ def edit_review(review_id):
             review = form.review_text.data
             image = form.image_url.data
 
+            # Add updated review to mongoDB
             updated_review = {
                 "material_name": material_name,
                 "brand": brand,
@@ -248,7 +260,7 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
-
+# Below are the app routes for each individual filament section
 @app.route("/pla")
 def pla():
     reviews = mongo.db.reviews.find()
@@ -318,6 +330,7 @@ def tpu():
 def wood():
     reviews = mongo.db.reviews.find()
     return render_template("materials/wood.html", reviews=reviews)
+# End of filament section app routes
     
 
 
