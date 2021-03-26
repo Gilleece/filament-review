@@ -268,6 +268,12 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
+
+@app.route("/admin_tools")
+def admin_tools():    
+    return render_template("admin_tools.html")
+
+
 # Below are the app routes for each individual filament section
 @app.route("/pla")
 def pla():
