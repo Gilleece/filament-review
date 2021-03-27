@@ -22,6 +22,10 @@
     object-fit: cover;
 }
 
+.title-card {
+    padding: 0 !important;
+}
+
 /***** Review Card Styles *****/
 
 .review-image {
