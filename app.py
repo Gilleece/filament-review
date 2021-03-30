@@ -32,10 +32,7 @@ def list_materials():
 
 @app.route("/register", methods=["GET", "POST"])
 # User registration functionality
-def register():
-    name = None
-    email = None
-    password = None
+def register():    
     form = RegistrationForm()
     if form.validate_on_submit():
         name = form.name.data.lower()
@@ -64,18 +61,13 @@ def register():
         return redirect(url_for("profile", username=session["user"]))
     return render_template(
         "register.html",
-        form=form,
-        name=name,
-        email=email,
-        password=password
+        form=form
     )
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     # Log In functionality
-    name = None
-    password = None
     form = loginForm()
     if form.validate_on_submit():
         name = form.name.data.lower()
@@ -102,25 +94,13 @@ def login():
 
     return render_template(
         "login.html",
-        form=form,
-        name=name,
-        password=password
+        form=form
     )
 
 
 @app.route("/add_review", methods=["GET", "POST"])
 def add_review():
     # Add review functionality
-    material_name = None
-    brand = None
-    filament_name = None
-    rating = None
-    cost = None
-    temp = None
-    colour = None
-    finish = None
-    review = None
-    image = None
     form = ReviewForm()
     if form.validate_on_submit():
         # Assign all parts of the form to variables
@@ -134,7 +114,6 @@ def add_review():
         colour = form.colour.data
         review = form.review.data
         image = form.image.data
-
         # Add review to mongoDB
         review = {
             "material_name": material_name,
@@ -152,21 +131,11 @@ def add_review():
         }
         mongo.db.reviews.insert_one(review)
         flash("Thanks for your review!")
-        return redirect(url_for("add_review"))    
+        return redirect(url_for("add_review"))
 
     return render_template(
         "add_review.html",
-        form=form,
-        material_name=material_name,
-        brand=brand,
-        filament_name=filament_name,
-        rating=rating,
-        cost=cost,
-        temp=temp,
-        colour=colour,
-        finish=finish,
-        review=review,
-        image=image,
+        form=form
     )
 
 
@@ -176,16 +145,6 @@ def edit_review(review_id):
     review_to_edit = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
     # Pass the existing review through to populate the form
     form = EditForm(**review_to_edit)
-    material_name = None
-    brand = None
-    filament_name = None
-    rating = None
-    cost = None
-    temp = None
-    colour = None
-    finish = None
-    review = None
-    image = None
     if request.method == 'POST':
         if form.validate_on_submit():
             # Assign all parts of the form to variables
@@ -224,17 +183,6 @@ def edit_review(review_id):
     return render_template(
         "edit_review.html",
         form=form,
-        material_name=material_name,
-        brand=brand,
-        filament_name=filament_name,
-        rating=rating,
-        cost=cost,
-        temp=temp,
-        colour=colour,
-        finish=finish,
-        review=review,
-        image=image,
-        review_id=review_id,
         review_to_edit=review_to_edit
     )
 
@@ -275,8 +223,7 @@ def admin_tools():
 
 
 @app.route("/search", methods=["GET", "POST"])
-def search():
-    query = None
+def search():    
     reviews = list(mongo.db.reviews.find({"$text": {"$search": ""}}))
     form = SearchForm()
     if form.validate_on_submit():
@@ -286,7 +233,6 @@ def search():
     return render_template(
         "search.html",
         form=form,
-        query=query,
         reviews=reviews
         )
 
