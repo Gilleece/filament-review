@@ -19,7 +19,9 @@ from wtforms.validators import (
 
 
 class RegistrationForm(FlaskForm):
-    """Sign up for a user account."""
+    ###
+    # Sign up for a user account.
+    ###
     name = StringField(
         'Username',
         [
@@ -60,7 +62,9 @@ class RegistrationForm(FlaskForm):
 
 
 class loginForm(FlaskForm):
-    """Log in to existing account."""
+    ###
+    # Log in to existing account.
+    ###
     name = StringField(
         'Username',
         [
@@ -77,7 +81,9 @@ class loginForm(FlaskForm):
 
 
 class ReviewForm(FlaskForm):
-    """Form for submitting a review"""
+    ###
+    # Form for submitting a review
+    ###
     material_name = SelectField(
         'Filament type',
         [DataRequired()],
@@ -163,7 +169,9 @@ class ReviewForm(FlaskForm):
 
 
 class EditForm(FlaskForm):
-    """Form for editing a review"""
+    ###
+    # Form for editing a review
+    ###
     material_name = SelectField(
         'Filament type',
         [DataRequired()],
@@ -249,7 +257,9 @@ class EditForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
-    """Search Reviews"""
+    ###
+    # Search Reviews
+    # ###
     query = StringField(
         'Search Query',
         [
