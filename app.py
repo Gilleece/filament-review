@@ -24,15 +24,19 @@ mongo = PyMongo(app)
 
 @app.route("/")
 @app.route("/list_materials")
+###
 # Show list of materials on index/materials page
+###
 def list_materials():
     materials = mongo.db.materials.find()
     return render_template("materials.html", materials=materials)
 
 
 @app.route("/register", methods=["GET", "POST"])
+###
 # User registration functionality
-def register():    
+###
+def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         name = form.name.data.lower()
@@ -67,7 +71,9 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    ###
     # Log In functionality
+    ###
     form = loginForm()
     if form.validate_on_submit():
         name = form.name.data.lower()
@@ -100,7 +106,9 @@ def login():
 
 @app.route("/add_review", methods=["GET", "POST"])
 def add_review():
+    ###
     # Add review functionality
+    ###
     form = ReviewForm()
     if form.validate_on_submit():
         # Assign all parts of the form to variables
@@ -141,7 +149,9 @@ def add_review():
 
 @app.route("/edit_review/<review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
+    ###
     # Edit review functionality
+    ###
     review_to_edit = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
     # Pass the existing review through to populate the form
     form = EditForm(**review_to_edit)
@@ -189,6 +199,9 @@ def edit_review(review_id):
 
 @app.route("/delete_review/<review_id>")
 def delete_review(review_id):
+    ###
+    # Delete reivew
+    ###
     mongo.db.reviews.remove({"_id": ObjectId(review_id)})
     flash("Review Sucessfully Deleted")
     return redirect(url_for(
@@ -197,7 +210,9 @@ def delete_review(review_id):
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    # grab the session user's username from db
+    ###
+    # Grab the session user's username from db
+    ###
     reviews = mongo.db.reviews.find()
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -211,19 +226,24 @@ def profile(username):
 
 @app.route("/logout")
 def logout():
-    # remove user from session cookies
+    ###
+    # Remove user from session cookies
+    ###
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
 
 
 @app.route("/admin_tools")
-def admin_tools():    
+def admin_tools():
     return render_template("admin_tools.html")
 
 
 @app.route("/search", methods=["GET", "POST"])
-def search():    
+def search():
+    ###
+    # Search functionality
+    ###
     reviews = list(mongo.db.reviews.find({"$text": {"$search": ""}}))
     form = SearchForm()
     if form.validate_on_submit():
@@ -237,7 +257,9 @@ def search():
         )
 
 
-# Below are the app routes for each individual filament section
+#################################################################
+# Below are the app routes for each individual filament section #
+#################################################################
 @app.route("/pla")
 def pla():
     reviews = mongo.db.reviews.find()
@@ -307,10 +329,14 @@ def tpu():
 def wood():
     reviews = mongo.db.reviews.find()
     return render_template("materials/wood.html", reviews=reviews)
-# End of filament section app routes
+######################################
+# End of filament section app routes #
+######################################
 
 
-# Error Handling
+##################
+# Error Handling #
+##################
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('404.html'), 404
@@ -325,5 +351,4 @@ def internal_error(error):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
-# Debug must be false on submission!
+            debug=False)
