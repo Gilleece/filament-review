@@ -6,10 +6,10 @@ References: Text examples from www.simplify3d.com
 
 [GitHub Repository](https://github.com/Gilleece/filament-review)
 
-![](assets/readme/responsiveness.png)
+![](static/images/capture.png)
 
-WhatWillWeWatch.com is my milestone 2 project. It is a site built upon the "The Movie DataBase" api, using a variety of endpoints to bring users a simple easy to use frontend that allows them to get movie recommendations based on their preferences, along with inputting their country to see on which services the movies are available for streaming or renting. The site is fully responsive and laid out in a minimal manner to present users with meaningful movie choices, and enough data to make those choices without being overwhelming or cluttered. The bulk of the site is dynamically generated through JS along with utilizing local storage to make for a more seamless and enjoyable user experience. 
- 
+Filament Review is my milestone 2 project. This site is intended to be a community driven resource for reviews of various 3D printer materials. Users can view reviews for the material of their choice, and make an account to upload their own reviews which the can later edit and delete if they want. The site is built using HTML, CSS, Python, Flask and MongoDB. 
+
 # Table of contents
 1. [UX](#UX)
     1. [First Time Visitor Goals](#firsttime)
@@ -36,34 +36,32 @@ WhatWillWeWatch.com is my milestone 2 project. It is a site built upon the "The 
 
 ## UX <a name="UX"></a>
 
-The primary goal with the sites UX, in terms of UI, was to make the website minimal and uncluttered. The website is designed to clearly and simply present data to the user that they will find useful and help them acheive their goal of choosing a movie to watch. 
+The primary goal with the sites UX, in terms of UI, was to make the site easy to use and look appealing to the type of person that uses 3D printers, hence the graph paper theme to emulate a hobbyist work environment. The website is designed to clearly and simply present data to the user that they will find useful and help them acheive their goal of finding reviews.
 
 ### First Time Visitor Goals: <a name="firsttime"></a>
 - As a first time visitor I need to be able to navigate the site easily and clearly understand how to use the function of the site.
-- I want to be able to see a clear list of movies, along with relevant details.
-- I want to quickly and easily alter my search preferences to get other movie recommendations.
+- I want to be able to see a clear list of materials, along with a description of each material.
+- I want to be able to search through reviews.
+- I want to find a suitable product for my purposes.
 
 ### Returning Visitor Goals: <a name="returning"></a>
-- I want my country saved to reduce the required input
- necessary.
-- I want the experience to remain consistent and continue to easily find good choices for me to watch.
-- I perhaps want to contact the site owner to make a suggestion.
+- I want to upload my own review.
+- I want to edit/delete a review I made.
+- I want to look at more reviews.
 
 ## Design: <a name="design"></a>
 
 ### Colour Scheme: <a name="colour"></a>
 ![](assets/readme/colors.png)
-- The site's primary colours are blue, white, black and orange. The above image shows the original colour selection for the site, the blue being the primary colour that all other colours were derived from using Abobe's colour tool [here](https://color.adobe.com/create/color-wheel)
-- I wanted to deliberately avoid colour schemes used by any particular streaming/rental service (such as Netflix). This was so avoid any perceived bias towards one service or such. 
+- The site's primary colours are blue and white. I ended up really liking the "primary" blue in bootstrap and found it perfect as it was unobtrusive and helped users focus on the content.
+- I wanted to deliberately avoid a variety of colour, keeping the site content and information focused. 
 
 ### Typography: <a name="typo"></a>
-- Site wide, Archivo is used. Being provided by google fonts.
-- This font was chosen as it looks modern and is easy to read.
+- Site wide, Helvetica Neue is used.
 
 ### Layout: <a name="layout"></a>
-- As mentioned earlier, the site is deliberately minimal in its style and layout. I chose to avoid images to keep the user focused on the movie recommendations, rather than the site surrounding them.
-- Movie recommendations are presented as cards and the site is built upon Bootstrap's grid system. The recommendation cards scale in number shown at once depending on the size of the user's device.
-- Basic info is presented at a glance, such as the movie's score, name, if a trailer is available and the poster. Users can click for an accordion style drop down to display more detailed information.
+- The site uses a familiar and intuitive layout.
+- Flask is used to present all content, along with flask forms for all forms on the site.
 
 ### Wireframes: <a name="wireframes"></a>
 
