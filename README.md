@@ -30,7 +30,6 @@ Filament Review is my milestone 3 project. This site is intended to be a communi
     1. [Using Heroku](#heroku)
     2. [Building Upon This Project](#building)
 7. [Credits](#credits)
-8. [Media](#Media)
 
 ## UX <a name="UX"></a>
 
