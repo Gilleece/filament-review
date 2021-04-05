@@ -63,52 +63,52 @@ The primary goal with the sites UX, in terms of UI, was to make the site easy to
 
 ### Wireframes: <a name="wireframes"></a>
 
-- The site's design ultimately shifted somewhat from the original wireframe, as I built the functionality of the site first and the frontend after. As a result, the original wireframe I made, before making any of the site, didn't seem ideal anymore and therefore I decided to change some aspects of the design to better suit where the completed functionality brought my thinking to.
+- The site's design changed slightly in production but the general idea and layout of the wireframe remains and was used to guide the design of the website as I made it.
 - Here is the original wireframe: 
 
-![](assets/readme/wireframe.png)
+![](static/images/wireframe.png)
 
 
 ## Features <a name="features"></a>
 
 ### Existing Features <a name="existing"></a>
 - Responsive on all devices.
-- Utilizes multiple api calls from a single user input to gather all relevant movie recommendations, their details and the sorting order.
-- The site makes use of local storage to enhance the user experience upon return visits.
-- HTML is dynamically generated and the site's layout dynamically responses to this.
-- The site utilizes, as it's inital sorting option, a "popularity" aspect of the api so that not just new movies are shown but rather movies that the community interacting with the database are interested in. This leads to more varied and useful results.
+- User accounts with passwords properly hashed and cookies for logged in users.
+- Log in, log out and register functionality.
+- Search Function
+- Flask is used for the sites layout.
+- Flask forms are used for all forms.
+- Users can submit, edit and delete their reviews.
+- Explanations of all material types present on the site. 
  
 
 ### Future Features <a name="future"></a>
-- The site could be updated to allow users to input their rating of a movie, allowing them to interact with the database.
-- User accounts so that users can add their "watched" movies to their account, which will be filtered out of the results and could be used for recommendations also (finding similar movies etc).
+- The reviews could have a like and dislike button, for users to give feedback on reviews and help avoid astroturfing.
 
 ## Technologies Used <a name="tech"></a>
 
 1. [HTML:](https://www.w3.org/html/)
     - HTML was used for the content and structure of the site, with emphasis placed on semantic elements and text alternatives for screen readers.
 1. [CSS:](https://www.w3.org/Style/CSS/)
+    - Bootstrap was used to assist with the responsiveness and styling of the website. 
+1. [Python:](https://www.python.org/)
+    - All backend was built using Python and Pymongo.
+1. [MongoDB:](https://www.mongodb.com/)
+    - MongoDB was the database service for the site.
+1. [Heroku:](https://www.heroku.com/)
+    - Heroku was used to host the site and test it in a live environment.
+1. [Bootstrap 5:](https://getbootstrap.com/)
     - Bootstrap was used to assist with the responsiveness and styling of the website.
-1. [Javascript:](https://www.javascript.com/)
-    - Javascript was used for the site's functionality and to generate html dynamically.   
-1. [Bootstrap 4.5.3:](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
-    - Bootstrap was used to assist with the responsiveness and styling of the website.
-1. [Google Fonts:](https://fonts.google.com/)
-    - Google fonts were used to import the 'Archivo' font into the style.css file which is used throughout the project.
 1. [Font Awesome:](https://fontawesome.com/)
     - Font Awesome was used on all pages throughout the website to add icons for aesthetic and UX purposes.
-1. [jQuery:](https://jquery.com/)
-    - jQuery was used for the api calls and for the flex data list. It was also used for dynamically generating HTML.
-1. [jQuery FlexDataList:](http://projects.sergiodinislopes.pt/flexdatalist/)
-    - This was used for the country input.
+1. [Flask:](https://flask.palletsprojects.com/en/1.1.x/)
+    - This was used for the sites structure and for all forms.
 1. [Git](https://git-scm.com/)
     - Git was used for version control by utilizing the Gitpod terminal to commit to Git and Push to GitHub.
 1. [GitHub:](https://github.com/)
     - GitHub is used to store the project's code after being pushed from Git.
 1. [Balsamiq:](https://balsamiq.com/)
-    - Balsamiq was used to create the wireframes during the design process.
-1. [Adobe Color:](https://color.adobe.com/create/color-wheel)
-    - Adobe Color was used to find suitable, complimentary, colours.    
+    - Balsamiq was used to create the wireframes during the design process.   
 1. [Gitpod:](https://www.gitpod.io/)
     - This was my IDE for the project. 
 
@@ -212,7 +212,9 @@ It has no impact on functionality and doesn't reference any code in my project (
 
 [W3C Validator CSS result](assets/readme/w3ccss.png) (Shows no errors).
 
-[JShint](https://jshint.com/) (Shows no issues on all js files: main.js, api.js, data.js).
+Google Lighthouse results:
+
+![](static/images/lighthouse.png)
 
 ## Deployment <a name="deployment"></a>
 
