@@ -1,10 +1,7 @@
-{% extends "base.html" %}
-{% block content %}
-
 <div class="row justify-content-center">
     <div class="col-12">
         <div class="card p-3 mb-5 bg-body">
-            <img src="/static/images/abs_example.jpg" class="card-img-top review-image"
+            <img src="{{material.example}}" class="card-img-top review-image"
                 alt="{{material.material_name}} example image">
             <div class="card-body">
                 <h3 class="card-title text-center">What is {{material.material_name}} filament?</h3>
@@ -30,5 +27,3 @@
         {% include 'reviews.html' %}  
     {% endfor %}
 </div>
-
-{% endblock %}

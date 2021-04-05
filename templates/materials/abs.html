@@ -1,43 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-
-    <div class="row justify-content-center">
-        <div class="col-12">
-            <div class="card p-3 mb-5 bg-body">
-                <img src="/static/images/abs_example.jpg" class="card-img-top review-image" alt="ABS example image">
-                <div class="card-body">
-                    <h3 class="card-title text-center">What is ABS filament?</h3> 
-                    <p class="card-text"> 
-                        ABS (Acrylonitrile Butadiene Styrene) has a long history in the 3D printing world. This 
-                        material was one of the first plastics to be used with industrial 3D printers. Many years 
-                        later, ABS is still a very popular material thanks to its low cost and good mechanical 
-                        properties. ABS is known for its toughness and impact resistance, allowing you to print 
-                        durable parts that will hold up to extra usage and wear. LEGO building blocks are made 
-                        from this material for that same reason! ABS also has a higher glass transition temperature, 
-                        which means the material can withstand much higher temperatures before it begins to deform. 
-                        This makes ABS a great choice for outdoor or high temperature applications. When printing 
-                        with ABS, be sure to use an open space with good ventilation, as the material tends to have 
-                        a slight odor. ABS also tends to contract quite a bit as it cools, so controlling the 
-                        temperature of your build volume and the part inside can have major benefits.                           
-                    </p>
-                </div>                
-            </div>
-        </div>
-    </div>
-
-    <div class="row justify-content-center">
-        <div class="card mt-3 col-10 col-md-8 text-white bg-primary shadow p-1 mb-3 rounded">
-            <div class="card-body title-card text-center">
-                <h3>
-                    Reviews of ABS Filament:
-                </h3>
-            </div>
-        </div>
-    </div>  
-
-    <div class="row row-cols-1 row-cols-md-2 g-4">        
-        {% include 'reviews.html' %}
-    </div>
-
+    {% include 'material_page.html' %}
 {% endblock %}
 

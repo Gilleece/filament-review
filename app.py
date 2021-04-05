@@ -146,31 +146,19 @@ def edit_review(review_id):
     form = EditForm(**review_to_edit)
     if request.method == 'POST':
         if form.validate_on_submit():
-            # Assign all parts of the form to variables
-            material_name = form.material_name.data
-            brand = form.brand.data
-            filament_name = form.filament_name.data
-            rating = int(form.rating.data)
-            cost = int(form.cost.data)
-            temp = form.temperature.data
-            finish = form.finish.data
-            colour = form.colour.data
-            review = form.review_text.data
-            image = form.image_url.data
-
             # Add updated review to mongoDB
             updated_review = {
-                "material_name": material_name,
-                "brand": brand,
-                "filament_name": filament_name,
+                "material_name": form.material_name.data,
+                "brand": form.brand.data,
+                "filament_name": form.filament_name.data,
                 "author": session["user"],
-                "rating": rating,
-                "temperature": temp,
-                "finish": finish,
-                "colour": colour,
-                "review_text": review,
-                "image_url": image,
-                "cost": cost,
+                "rating": int(form.rating.data),
+                "temperature": form.temperature.data,
+                "finish": form.finish.data,
+                "colour": form.colour.data,
+                "review_text": form.review_text.data,
+                "image_url": form.image_url.data,
+                "cost": int(form.cost.data),
                 "likes": 0
             }
             mongo.db.reviews.update(
