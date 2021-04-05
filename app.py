@@ -213,6 +213,9 @@ def logout():
 
 @app.route("/admin_tools")
 def admin_tools():
+    """
+    Render Admin Tools Page (currently placeholder, no actual tools present)
+    """
     return render_template("admin_tools.html")
 
 
@@ -234,13 +237,11 @@ def search():
     )
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""##
-# Below are the app routes for each individual filament section #
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
 @app.route("/material/<material_name>", methods=["GET"])
 def material(material_name):
+    """
+    App route handling for material pages
+    """
     material_obj = mongo.db.materials.find({'path': material_name})
     reviews = mongo.db.reviews.find({'material_name': material_name})
     return render_template(
@@ -256,11 +257,17 @@ def material(material_name):
 
 @app.errorhandler(404)
 def not_found_error(error):
+    """
+    404 Error Handler
+    """
     return render_template('404.html'), 404
 
 
 @app.errorhandler(Exception)
 def internal_error(error):
+    """
+    General Error Handler
+    """    
     return render_template('500.html'), 500
 
 
