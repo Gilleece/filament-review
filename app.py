@@ -241,9 +241,12 @@ def search():
 
 @app.route("/material/<material_name>", methods=["GET"])
 def material(material_name):
-    # material_obj = mongo.db.material.find({''})
+    material_obj = mongo.db.materials.find({'path': material_name})
     reviews = mongo.db.reviews.find({'material_name': material_name})
-    return render_template(f"materials/{material_name}.html", reviews=reviews)
+    return render_template(
+        "material_page.html",
+        reviews=reviews,
+        material_obj=material_obj)
 
 
 """

@@ -87,18 +87,18 @@ class ReviewForm(FlaskForm):
         'Filament type',
         [DataRequired()],
         choices=[
-            ('ABS', 'ABS'),
-            ('ASA', 'ASA'),
-            ('Carbon', 'Carbon Fiber'),
-            ('HIPS', 'HIPS'),
-            ('Metal', 'Metal'),
-            ('Nylon', 'Nylon'),
-            ('PETG', 'PETG'),
-            ('PLA', 'PLA'),
-            ('Polycarbonate', 'Polycarbonate'),
-            ('PVA', 'PVA'),
-            ('TPU', 'TPU'),
-            ('Wood', 'Wood')
+            ('abs', 'ABS'),
+            ('asa', 'ASA'),
+            ('carbon', 'Carbon Fiber'),
+            ('hips', 'HIPS'),
+            ('metal', 'Metal'),
+            ('nylon', 'Nylon'),
+            ('petg', 'PETG'),
+            ('pla', 'PLA'),
+            ('polycarbonate', 'Polycarbonate'),
+            ('pva', 'PVA'),
+            ('tpu', 'TPU'),
+            ('wood', 'Wood')
         ]
     )
     brand = StringField(
@@ -175,18 +175,18 @@ class EditForm(FlaskForm):
         'Filament type',
         [DataRequired()],
         choices=[
-            ('ABS', 'ABS'),
-            ('ASA', 'ASA'),
-            ('Carbon', 'Carbon Fiber'),
-            ('HIPS', 'HIPS'),
-            ('Metal', 'Metal'),
-            ('Nylon', 'Nylon'),
-            ('PETG', 'PETG'),
-            ('PLA', 'PLA'),
-            ('Polycarbonate', 'Polycarbonate'),
-            ('PVA', 'PVA'),
-            ('TPU', 'TPU'),
-            ('Wood', 'Wood')
+            ('abs', 'ABS'),
+            ('asa', 'ASA'),
+            ('carbon', 'Carbon Fiber'),
+            ('hips', 'HIPS'),
+            ('metal', 'Metal'),
+            ('nylon', 'Nylon'),
+            ('petg', 'PETG'),
+            ('pla', 'PLA'),
+            ('polycarbonate', 'Polycarbonate'),
+            ('pva', 'PVA'),
+            ('tpu', 'TPU'),
+            ('wood', 'Wood')
         ]
     )
     brand = StringField(

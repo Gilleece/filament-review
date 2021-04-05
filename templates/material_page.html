@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for material in material_obj %}
 <div class="row justify-content-center">
     <div class="col-12">
         <div class="card p-3 mb-5 bg-body">
@@ -21,9 +25,12 @@
         </div>
     </div>
 </div>
+{% endfor %}
 
 <div class="row row-cols-1 row-cols-md-2 g-4">
     {% for review in reviews %}
-        {% include 'reviews.html' %}  
+        {% include 'reviews.html' %}
     {% endfor %}
 </div>
+
+{% endblock %}
