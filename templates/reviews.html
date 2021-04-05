@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-4">
+                <div class="col-12 col-md-4">
                     <h6>Rating</h6>
                     <p>
                         {% if review.rating == 1 %}
@@ -55,12 +55,12 @@
                         {% endif %}
                     </p>
                 </div>
-                <div class="col-4">
+                <div class="col-6 col-md-4">
                     <h6><i class="fas fa-thermometer-three-quarters thermometer"></i> Temp</h6>
                     <p>{{ review.temperature }}c</p>
                 </div>
-                <div class="col-4">
-                    <h6><i class="fas fa-money-bill-wave money"></i> Cost:</h6>
+                <div class="col-6 col-md-4">
+                    <h6><i class="fas fa-money-bill-wave money"></i> Cost</h6>
                     <p>
                         {% if review.cost == 1 %}
                         <i class="fas fa-dollar-sign" style="color: green;"></i>
