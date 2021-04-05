@@ -267,7 +267,7 @@ def not_found_error(error):
 def internal_error(error):
     """
     General Error Handler
-    """    
+    """
     return render_template('500.html'), 500
 
 

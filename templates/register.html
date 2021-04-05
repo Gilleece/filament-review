@@ -1,54 +1,54 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <section>
-        <!-- Error Messages-->
+<section>
+    <!-- Error Messages-->
 
-        <!-- Username Input Errors -->
-        {% if form.name.errors %}            
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="alert alert-warning alert-dismissible fade show col-6 mt-5 shadow-lg p-3 mb-5 rounded"
-                        role="alert">
-                        {% for error in form.name.errors %}
-                        <strong>{{ error }}</strong><br>
-                        {% endfor %}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-            </div>            
-        {% endif %}
+    <!-- Username Input Errors -->
+    {% if form.name.errors %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="alert alert-warning alert-dismissible fade show col-6 mt-5 shadow-lg p-3 mb-5 rounded"
+                role="alert">
+                {% for error in form.name.errors %}
+                <strong>{{ error }}</strong><br>
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
-        <!-- Email Input Errors -->
-        {% if form.email.errors %}            
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="alert alert-warning alert-dismissible fade show col-6 mt-5 shadow-lg p-3 mb-5 rounded"
-                        role="alert">
-                        {% for error in form.email.errors %}
-                        <strong>{{ error }}</strong>
-                        {% endfor %}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-            </div>            
-        {% endif %}
+    <!-- Email Input Errors -->
+    {% if form.email.errors %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="alert alert-warning alert-dismissible fade show col-6 mt-5 shadow-lg p-3 mb-5 rounded"
+                role="alert">
+                {% for error in form.email.errors %}
+                <strong>{{ error }}</strong>
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
-        <!-- Confirm Password Errors -->
-        {% if form.password.errors %}            
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="alert alert-warning alert-dismissible fade show col-6 mt-5 shadow-lg p-3 mb-5 rounded"
-                        role="alert">
-                        {% for error in form.password.errors %}
-                        <strong>{{ error }}</strong>
-                        {% endfor %}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-            </div>            
-        {% endif %}
-    </section>
+    <!-- Confirm Password Errors -->
+    {% if form.password.errors %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="alert alert-warning alert-dismissible fade show col-6 mt-5 shadow-lg p-3 mb-5 rounded"
+                role="alert">
+                {% for error in form.password.errors %}
+                <strong>{{ error }}</strong>
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</section>
 
 <div class="container">
 
@@ -63,7 +63,8 @@
     </div>
 
     <div class="row justify-content-center">
-        <form class="card mt-5 col-10 col-md-8 text-white bg-primary shadow p-3 mb-5 rounded" method="POST" action="{{ url_for('register') }}">
+        <form class="card mt-5 col-10 col-md-8 text-white bg-primary shadow p-3 mb-5 rounded" method="POST"
+            action="{{ url_for('register') }}">
             {{ form.hidden_tag() }}
             <div class="card-body">
                 <!-- Username -->
@@ -73,8 +74,7 @@
                 </div>
                 <!-- Email -->
                 <div class="input-group mb-3 mt-3">
-                    <span class="input-group-text form-icon"><i
-                            class="fas fa-envelope"></i></span>
+                    <span class="input-group-text form-icon"><i class="fas fa-envelope"></i></span>
                     {{ form.email(class_='form-control', placeholder="Email") }}
                 </div>
                 <!-- Password -->
@@ -97,7 +97,8 @@
 
     <div class="row">
         <div class="col-12 text-center">
-            <h6>Already have an account? <a href="{{ url_for('login') }}" class="text-decoration-underline">Log In</a></h6>
+            <h6>Already have an account? <a href="{{ url_for('login') }}" class="text-decoration-underline">Log In</a>
+            </h6>
         </div>
     </div>
 

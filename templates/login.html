@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block content %}    
+{% block content %}
 
 <div class="container">
 
@@ -14,14 +14,15 @@
     </div>
 
     <div class="row justify-content-center">
-        <form class="card mt-5 col-10 col-md-8 text-white bg-primary shadow p-3 mb-5 rounded" method="POST" action="{{ url_for('login') }}">
+        <form class="card mt-5 col-10 col-md-8 text-white bg-primary shadow p-3 mb-5 rounded" method="POST"
+            action="{{ url_for('login') }}">
             {{ form.hidden_tag() }}
             <div class="card-body">
                 <!-- Username -->
                 <div class="input-group flex-nowrap mb-3">
                     <span class="input-group-text form-icon"><i class="fas fa-user-cog"></i></span>
                     {{ form.name(class_='form-control', placeholder='Username') }}
-                </div>                
+                </div>
                 <!-- Password -->
                 <div class="input-group mb-3">
                     <span class="input-group-text form-icon"><i class="fas fa-lock"></i></span>
@@ -37,7 +38,8 @@
 
     <div class="row">
         <div class="col-12 text-center">
-            <h6>Don't have an account? <a href="{{ url_for('register') }}" class="text-decoration-underline">Sign Up</a></h6>
+            <h6>Don't have an account? <a href="{{ url_for('register') }}" class="text-decoration-underline">Sign Up</a>
+            </h6>
         </div>
     </div>
 
