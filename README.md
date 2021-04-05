@@ -70,7 +70,7 @@ The primary goal with the sites UX, in terms of UI, was to make the site easy to
 
 ### Database Schema: <a name="schema"></a>
 
-There are 3 collections in the database titled "materials", "reviews" and "users" respectively. 
+There are 3 collections in the database titled "materials", "reviews" and "users". 
 
 #### Materials:
     material_name: string
@@ -193,7 +193,20 @@ Some examples of manual testing procedures are as follows:
 - Expected: User, that has created a review, can edit their review.
 - Testing: Tested the feature by going to the profile page, scrolling down to the user's reviews and clicking edit on one of them.
 - Result: The user is redirected to the edit page where the edit form is generated, already populated by the relevant data from their review. Editing this data and clicking submit, then viewing the review on their profile page, confirms that the form is working as intended and the data is being correctly updated.
-          
+
+#### Testing 4:
+
+- Expected: User encounters a bad link, or server error, which results in one of the pre-made error pages being displayed.
+- Testing: Tested the feature by typing in deliberately wrong urls, and logging out and trying to access the profile url without the relevant cookie.
+- Result: The user is redirected to either the 404.html or 500.html page depending on the error encountered. 
+
+#### Testing 5:
+
+- Expected: User forgets to fill out part of a review form, which should give the user a warning message and not submit the form until all fields have been filled in.
+- Testing: Tested the feature by going to the add review page and deliberately leaving one of the fields empty.
+- Result: The user is alerted as to which field they did not fill in, or in the case of incorrect information in the field then a flash message displaying what must be entered is displayed.
+ 
+      
 ### Bugs: <a name="bugs"></a>
 
 These are examples of some bugs that my manual testing uncovered, and how I fixed them.
