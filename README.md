@@ -17,6 +17,7 @@ Filament Review is my milestone 3 project. This site is intended to be a communi
     2. [Typography](#typo)
     3. [Layout](#layout)
     4. [Wireframes](#wireframes)
+    5. [Database Schema](#schema)
 3. [Features](#features)
     1. [Existing Features](#existing)
     2. [Future Features](#future)
@@ -49,7 +50,7 @@ The primary goal with the sites UX, in terms of UI, was to make the site easy to
 ## Design: <a name="design"></a>
 
 ### Colour Scheme: <a name="colour"></a>
-![](assets/readme/colors.png)
+![](static/images/color.png)
 - The site's primary colours are blue and white. I ended up really liking the "primary" blue in bootstrap and found it perfect as it was unobtrusive and helped users focus on the content.
 - I wanted to deliberately avoid a variety of colour, keeping the site content and information focused. 
 
@@ -66,6 +67,40 @@ The primary goal with the sites UX, in terms of UI, was to make the site easy to
 - Here is the original wireframe: 
 
 ![](static/images/wireframe.png)
+
+### Database Schema: <a name="schema"></a>
+
+There are 3 collections in the database titled "materials", "reviews" and "users" respectively. 
+
+#### Materials:
+    material_name: string
+    image: string
+    path: string
+    material_description: string
+    example: string 
+
+#### Reviews:
+    material_name: string
+    brand: string
+    filament_name: string
+    author: string
+    rating: integer
+    temperature: integer
+    colour: string
+    finish: string
+    review_text: string
+    image_url: string
+    cost: integer
+    likes: integer
+
+#### Users:
+    username: string
+    email: string
+    password: string
+    admin: boolean
+
+
+
 
 
 ## Features <a name="features"></a>
