@@ -17,11 +17,10 @@ from wtforms.validators import (
 )
 
 
-
 class RegistrationForm(FlaskForm):
-    ###
-    # Sign up for a user account.
-    ###
+    """
+    Sign up for a user account.
+    """
     name = StringField(
         'Username',
         [
@@ -30,12 +29,12 @@ class RegistrationForm(FlaskForm):
                 "^[a-zA-Z0-9]{5,15}$",
                 flags=0,
                 message="Usernames may only contain letters and numbers."
-                ),
+            ),
             Length(
                 min=5,
                 max=15,
                 message="Usernames must be between 5 and 15 characters long."
-                )
+            )
         ]
     )
     email = StringField(
@@ -61,10 +60,10 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
-class loginForm(FlaskForm):
-    ###
-    # Log in to existing account.
-    ###
+class LoginForm(FlaskForm):
+    """
+    Log in to existing account.
+    """
     name = StringField(
         'Username',
         [
@@ -81,9 +80,9 @@ class loginForm(FlaskForm):
 
 
 class ReviewForm(FlaskForm):
-    ###
-    # Form for submitting a review
-    ###
+    """
+    Form for submitting a review
+    """
     material_name = SelectField(
         'Filament type',
         [DataRequired()],
@@ -158,7 +157,7 @@ class ReviewForm(FlaskForm):
             Length(
                 max=250,
                 message="Please keep reviews short and concise (250 char max)."
-                )
+            )
         ]
     )
     image = StringField(
@@ -169,9 +168,9 @@ class ReviewForm(FlaskForm):
 
 
 class EditForm(FlaskForm):
-    ###
-    # Form for editing a review
-    ###
+    """
+    Form for editing a review
+    """
     material_name = SelectField(
         'Filament type',
         [DataRequired()],
@@ -246,7 +245,7 @@ class EditForm(FlaskForm):
             Length(
                 max=250,
                 message="Please keep reviews short and concise (250 char max)."
-                )
+            )
         ]
     )
     image_url = StringField(
@@ -257,9 +256,9 @@ class EditForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
-    ###
-    # Search Reviews
-    # ###
+    """
+    Search Reviews
+    """
     query = StringField(
         'Search Query',
         [
@@ -267,7 +266,7 @@ class SearchForm(FlaskForm):
             Length(
                 min=3,
                 message="Minimum length of search is 3 characters."
-                )
+            )
         ]
     )
     submit = SubmitField('Search')

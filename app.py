@@ -1,11 +1,11 @@
 import os
 from flask import (
     Flask, flash, render_template, redirect,
-     request, session, url_for)
+    request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegistrationForm, loginForm, ReviewForm, EditForm, SearchForm
+from forms import RegistrationForm, LoginForm, ReviewForm, EditForm, SearchForm
 from extensions import csrf
 if os.path.exists("env.py"):
     import env
@@ -24,19 +24,19 @@ mongo = PyMongo(app)
 
 @app.route("/")
 @app.route("/list_materials")
-###
-# Show list of materials on index/materials page
-###
 def list_materials():
+    """
+    Show list of materials on index/materials page
+    """
     materials = mongo.db.materials.find()
     return render_template("materials.html", materials=materials)
 
 
 @app.route("/register", methods=["GET", "POST"])
-###
-# User registration functionality
-###
 def register():
+    """
+    User registration functionality
+    """
     form = RegistrationForm()
     if form.validate_on_submit():
         name = form.name.data.lower()
@@ -71,10 +71,10 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    ###
-    # Log In functionality
-    ###
-    form = loginForm()
+    """
+    Log In functionality
+    """
+    form = LoginForm()
     if form.validate_on_submit():
         name = form.name.data.lower()
         password = form.password.data
@@ -106,35 +106,24 @@ def login():
 
 @app.route("/add_review", methods=["GET", "POST"])
 def add_review():
-    ###
-    # Add review functionality
-    ###
+    """
+    Add review functionality
+    """
     form = ReviewForm()
     if form.validate_on_submit():
-        # Assign all parts of the form to variables
-        material_name = form.material_name.data
-        brand = form.brand.data
-        filament_name = form.filament_name.data
-        rating = int(form.rating.data)
-        cost = int(form.cost.data)
-        temp = form.temp.data
-        finish = form.finish.data
-        colour = form.colour.data
-        review = form.review.data
-        image = form.image.data
-        # Add review to mongoDB
+        # Assign all parts of the form to variables and add review to mongoDB
         review = {
-            "material_name": material_name,
-            "brand": brand,
-            "filament_name": filament_name,
+            "material_name": form.material_name.data,
+            "brand": form.brand.data,
+            "filament_name": form.filament_name.data,
             "author": session["user"],
-            "rating": rating,
-            "temperature": temp,
-            "finish": finish,
-            "colour": colour,
-            "review_text": review,
-            "image_url": image,
-            "cost": cost,
+            "rating": int(form.rating.data),
+            "temperature": form.temp.data,
+            "finish": form.finish.data,
+            "colour": form.colour.data,
+            "review_text": form.review.data,
+            "image_url": form.image.data,
+            "cost": int(form.cost.data),
             "likes": 0
         }
         mongo.db.reviews.insert_one(review)
@@ -149,9 +138,9 @@ def add_review():
 
 @app.route("/edit_review/<review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
-    ###
-    # Edit review functionality
-    ###
+    """
+    Edit review functionality
+    """
     review_to_edit = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
     # Pass the existing review through to populate the form
     form = EditForm(**review_to_edit)
@@ -188,7 +177,7 @@ def edit_review(review_id):
                 {"_id": ObjectId(review_id)}, updated_review)
             flash("Review successfully updated.")
             return redirect(url_for(
-                    "profile", username=session["user"]))
+                "profile", username=session["user"]))
 
     return render_template(
         "edit_review.html",
@@ -199,9 +188,9 @@ def edit_review(review_id):
 
 @app.route("/delete_review/<review_id>")
 def delete_review(review_id):
-    ###
-    # Delete reivew
-    ###
+    """
+    Delete reivew
+    """
     mongo.db.reviews.remove({"_id": ObjectId(review_id)})
     flash("Review Sucessfully Deleted")
     return redirect(url_for(
@@ -210,9 +199,9 @@ def delete_review(review_id):
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    ###
-    # Grab the session user's username from db
-    ###
+    """
+    Grab the session user's username from db
+    """
     reviews = mongo.db.reviews.find()
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -226,9 +215,9 @@ def profile(username):
 
 @app.route("/logout")
 def logout():
-    ###
-    # Remove user from session cookies
-    ###
+    """
+    Remove user from session cookies
+    """
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
@@ -241,9 +230,9 @@ def admin_tools():
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
-    ###
-    # Search functionality
-    ###
+    """
+    Search functionality
+    """
     reviews = list(mongo.db.reviews.find({"$text": {"$search": ""}}))
     form = SearchForm()
     if form.validate_on_submit():
@@ -254,89 +243,26 @@ def search():
         "search.html",
         form=form,
         reviews=reviews
-        )
+    )
 
 
-#################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""##
 # Below are the app routes for each individual filament section #
-#################################################################
-@app.route("/pla")
-def pla():
-    reviews = mongo.db.reviews.find()
-    return render_template("materials/pla.html", reviews=reviews)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-@app.route("/abs")
-def abs():
-    reviews = mongo.db.reviews.find()
-    return render_template("materials/abs.html", reviews=reviews)
+@app.route("/material/<material_name>", methods=["GET"])
+def material(material_name):
+    # material_obj = mongo.db.material.find({''})
+    reviews = mongo.db.reviews.find({'material_name': material_name})
+    return render_template(f"materials/{material_name}.html", reviews=reviews)
 
 
-@app.route("/asa")
-def asa():
-    reviews = mongo.db.reviews.find()
-    return render_template("materials/asa.html", reviews=reviews)
+"""
+ Error Handling
+"""
 
 
-@app.route("/carbon")
-def carbon():
-    reviews = mongo.db.reviews.find()
-    return render_template("materials/carbon.html", reviews=reviews)
-
-
-@app.route("/hips")
-def hips():
-    reviews = mongo.db.reviews.find()
-    return render_template("materials/hips.html", reviews=reviews)
-
-
-@app.route("/metal")
-def metal():
-    reviews = mongo.db.reviews.find()
-    return render_template("materials/metal.html", reviews=reviews)
-
-
-@app.route("/nylon")
-def nylon():
-    reviews = mongo.db.reviews.find()
-    return render_template("materials/nylon.html", reviews=reviews)
-
-
-@app.route("/petg")
-def petg():
-    reviews = mongo.db.reviews.find()
-    return render_template("materials/petg.html", reviews=reviews)
-
-
-@app.route("/polycarbonate")
-def polycarbonate():
-    reviews = mongo.db.reviews.find()
-    return render_template("materials/polycarbonate.html", reviews=reviews)
-
-@app.route("/pva")
-def pva():
-    reviews = mongo.db.reviews.find()
-    return render_template("materials/pva.html", reviews=reviews)
-
-
-@app.route("/tpu")
-def tpu():
-    reviews = mongo.db.reviews.find()
-    return render_template("materials/tpu.html", reviews=reviews)
-
-
-@app.route("/wood")
-def wood():
-    reviews = mongo.db.reviews.find()
-    return render_template("materials/wood.html", reviews=reviews)
-######################################
-# End of filament section app routes #
-######################################
-
-
-##################
-# Error Handling #
-##################
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('404.html'), 404
@@ -344,7 +270,6 @@ def not_found_error(error):
 
 @app.errorhandler(Exception)
 def internal_error(error):
-    db.session.rollback()
     return render_template('500.html'), 500
 
 

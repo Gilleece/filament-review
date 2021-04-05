@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="card p-3 mb-5 bg-body">
+            <img src="/static/images/abs_example.jpg" class="card-img-top review-image"
+                alt="{{material.material_name}} example image">
+            <div class="card-body">
+                <h3 class="card-title text-center">What is {{material.material_name}} filament?</h3>
+                <p class="card-text"> {{material.material_description}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="card mt-3 col-10 col-md-8 text-white bg-primary shadow p-1 mb-3 rounded">
+        <div class="card-body title-card text-center">
+            <h3>
+                Reviews of {{material.material_name}} Filament:
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for review in reviews %}
+        {% include 'reviews.html' %}  
+    {% endfor %}
+</div>
+
+{% endblock %}
