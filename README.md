@@ -6,7 +6,7 @@
 
 ![](static/images/capture.png)
 
-Filament Review is my milestone 2 project. This site is intended to be a community driven resource for reviews of various 3D printer materials. Users can view reviews for the material of their choice, and make an account to upload their own reviews which the can later edit and delete if they want. The site is built using HTML, CSS, Python, Flask and MongoDB. 
+Filament Review is my milestone 3 project. This site is intended to be a community driven resource for reviews of various 3D printer materials. Users can view reviews for the material of their choice, and make an account to upload their own reviews which the can later edit and delete if they want. The site is built using HTML, CSS, Python, Flask and MongoDB. 
 
 # Table of contents
 1. [UX](#UX)
@@ -142,69 +142,30 @@ My manual testing process was as follows.
             
 ### Bugs: <a name="bugs"></a>
 
-This is not an exhaustive list but gives examples of some particular bugs that occured and how I fixed them.
+#### Bug 1:
 
-#### Bug: Setting the "decade from" caused no results to show up, even though "decade to" worked just fine. "decade from" default also worked just fine.
+- Expected: User fills in the review form, clicks submit and the form is entered into the database.
+- Testing: Tested the feature by filling in the review form and clicking submit.
+- Result: Form appeared to behave as intended, however there was no new entry in the database.
+- Fix: I set up console logs for errors to catch any problems, as a result I found that the form was not submitting due to a missing CSRF token. Ensuring that the token was being generated fixed the issue and the form submitted as intended.
 
-Solution: Initially I couldn't see any error in the syntax of my code. The test implied that
-the "decade from" was causing the error. Eventually I realized that trying 
-different dates was causing no issues. It turned out to be a simple error of 
-copy/pasting code and not correctly updating it. As a result in my HTML for
-the "decade to" selector, it had "from" typed in instead of "value". It was just a
-simple error but was a good lesson in remembering to look at the simplest 
-issues first instead of trying to change things that I assume to be the 
-problem without having any real solid evidence for such assumptions.
+#### Bug 2:
 
-#### Bug: Some movie runtimes are input wrong into the api database
+- Expected: When switching to mobile, all content should properly center and be displayed in an easily readible manner.
+- Testing: Tested the feature by viewing the website on a mobile device, and also using the mobile device emulator built into the browser.
+- Result: Most of the site appeared correctly, except for the titles of the review cards which were breaking to a second line and looked very messy. 
+- Fix: I simply made the text smaller and this fixed it.
 
-Solution: The api that I used, tmdb, relies upon community fed information. For the
-most part this is great and enables such a wonderful api but for runtime, some movies get entered in 
-incorrectly. For example, a 1hr39min movie may get entered in as just 
-39mins due to a typo. My original plan was to allow for movie runtime search to be from 3 
-hours down to 30 minutes. However, at these lower times there were often 
-feature length movies included in the result. This is unavoidable 
-due to not being able to control that aspect of the database. As a result, my 
-compromise was to set a 60 minute limit in the code to searchs, and restrict 
-search criteria from "any length" to "1.5 hours max". This meant that results 
-were accurate. The site was intended for feature length movies, so this
-hasn't really impacted the intended purpose of the site whilst also taking
-away what would be a very frustrating experience for users.
+#### Bug 3:
 
-This was a particularly useful issue in learning the limitations of some APIs and improving my approach towards
-using them. 
-
-#### Bug: Api returns certain data in a manner that is not particularly useful to the user.
-
-Solution: The best example of this is the language that is returned for each movie. Rather than returning 
-"English", for example, it would return EN. To make the user experience better I utilized a list of language codes,
-that I placed into an object, and through this was able to return plain words such as "German" etc instead of a language code. 
-
-#### Bug: Moved recommendation Card from index.html into main.js to dynamically generate it, however the play trailer button is no longer working.
-
-Solution: I originally tested to see if the link being generated was broken, then to see if
-the html being generated was broken. I tried removing any dynamically 
-generated parts and manually inserting them. Eventually I realized that the
-issue was with the snippet of code that controls the autoplay on and off 
-feature. It was being executed before the rest of the code related to the play
-trailer button. The easiest solution was to simple move it into the same loop
-as the other code and the problem was solved. 
-
-#### Bug: Deferred exceptions appearing in the console log for whereToRent and whereToStream
-
-Solution: Although the functionality of the code was unaffected, I kept getting these 
-errors in the console. What I realized was that when my code was checking if the selected 
-country had choices to rent or stream the movie I was missing a check to see if the selected country was actually being returned by the api call in the 
-first place. Putting an additional check for the country fixed this error.
-
+- Expected: User clicks edit on their review and the form is generated with their review's content present.
+- Testing: Tested the feature by logging in as a user with a review in the database, going to profile, and clicking edit under the review.
+- Result: Form appeared and was functional, however the previous review's contents were not generating.
+- Fix: I originally checked for any errors, however none were being presented. I tried posting the various form data to the console where I realized that it was coming up NULL. This lead me to finding the issue which was simply that I had mixed up two different app route variable names. Changing the variable name to the correct one in the app route fixed the issue. 
 
 ### Known issues: <a name="issues"></a>
 
-Currently, there is one known issue.
-
-#### Known issue: Calling embedded youtube videos, in this case clicking on "Play Trailer" button causes a console log error "GET chrome-extension://invalid/ net::ERR_FAILED".
-
-More details: Searching online shows that this has been going back to 2015, and it seems to be unavoidable. 
-It has no impact on functionality and doesn't reference any code in my project (rather it referes to "remote.js:35, on google's side). 
+Currently, there are no known issues.
 
 ### Automatic Testing: <a name="auto"></a>
 
@@ -258,9 +219,9 @@ To get set up with a copy of my project you can do these multiple ways.
 ## Credits <a name="credits"></a>
 - Thanks to [Reuben Ferrante](https://github.com/arex18), my Code Institute mentor, for his guidance and insight.
 
-- Text examples explaining each filament from www.simplify3d.com
-
 - Thanks to the Code Institute Slack community, it was a great resource for issues.
+
+- Text examples explaining each filament from www.simplify3d.com
 
 - Bootstrap, particularly their great documentation.
 
