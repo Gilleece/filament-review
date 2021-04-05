@@ -123,7 +123,7 @@ While building the site I had a preview open in my browser that I would check re
 across a number of things. I would use the console tools to try out different ideas, particularly styling, to see how it worked in real time and then implement the code written there into the project itself.
 Responsiveness testing was done both through console tools, along with trying different browsers on different devices. 
 
-My manual testing process was as follows.
+My manual testing process was as follows:
 
 #### For each page I performed the following checks:
     * Desktop and mobile
@@ -138,8 +138,30 @@ My manual testing process was as follows.
         - Try common gestures like pinch to zoom, rotating orientation.     
 
     All tests were performed across multiple browsers and OS.
-            
+
+Some examples of manual testing procedures are as follows:
+
+#### Testing 1:
+
+- Expected: User fills in the registration form and an account is created.
+- Testing: Tested the feature by filling in the registration form and submitting it. 
+- Result: The appropriate flash message appears, the cookie is created, and going to the profile page confirms that the account has indeed been created. Further more, manually checking the database shows the user present.
+
+#### Testing 2:
+
+- Expected: User, that has created an account, returns to the site and can log in.
+- Testing: Tested the feature by filling in the login form and submitting it.
+- Result: The appropriate flash message appears, the cookie is created, and the user is redirected to their profile page.
+
+#### Testing 3:
+
+- Expected: User, that has created a review, can edit their review.
+- Testing: Tested the feature by going to the profile page, scrolling down to the user's reviews and clicking edit on one of them.
+- Result: The user is redirected to the edit page where the edit form is generated, already populated by the relevant data from their review. Editing this data and clicking submit, then viewing the review on their profile page, confirms that the form is working as intended and the data is being correctly updated.
+          
 ### Bugs: <a name="bugs"></a>
+
+These are examples of some bugs that my manual testing uncovered, and how I fixed them.
 
 #### Bug 1:
 
