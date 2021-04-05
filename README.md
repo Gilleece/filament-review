@@ -1,5 +1,3 @@
-References: Text examples from www.simplify3d.com
-
 # Filament Review - Milestone 3 Project
 
 [Live link](https://filament-review.herokuapp.com/)
@@ -29,8 +27,8 @@ Filament Review is my milestone 2 project. This site is intended to be a communi
     3. [Bugs](#bugs)
     4. [Known Issues](#issues)
 6. [Deployment](#deployment)
-    1. [Github Pages](#pages)
-    2. [Making A Local Clone](#local)
+    1. [Using Heroku](#heroku)
+    2. [Building Upon This Project](#building)
 7. [Credits](#credits)
 8. [Media](#Media)
 
@@ -218,71 +216,54 @@ It has no impact on functionality and doesn't reference any code in my project (
 
 ## Deployment <a name="deployment"></a>
 
-### GitHub Pages <a name="pages"></a>
+### Using Heroku: <a name="heroku"></a>
 
-I deployed this site through GitHub pages. This was a simple process, as follows:
-
-- Log into GitHub
-
-- Go to the repository (you must own it, so fork mine if deploying this site)
-
-- Go to settings
-
-- Scroll down to "GitHub Pages" section
-
-- Select the source (I chose master branch in this instance)
-
-- After some time, the site will be deployed at: ```http://<username>.github.io/<repository-name>```
-
-### Making A Local Clone <a name="local"></a>
+Hosting this project on Heroku required the following: - 
+1. Make sure all project keys and secret values are placed in the heroku Config Vars for production.
+2. Make sure requirements.txt is up to date with the following command: 	
+		```
+		pip3 freeze > requirements.txt
+		```
+3. Set up the Procfile - *A Procfile is required by Heroku .*
+4. Set Flask's debugging to False.
+5. Push all code to GitHub then use Heroku's GitHub function to deploy from GitHub to the production ready app.
 
 
-- Log in to GitHub and locate the [GitHub Repository](https://github.com/Gilleece/CodeInstitute-Milestone-Project-1)
-- Under the repository name, click "Clone or download".
-- To clone the repository using HTTPS, under "Clone with HTTPS", copy the link.
-- Open Git Bash
-- Change the current working directory to the location where you want the cloned directory to be made.
-- Type `git clone`, and then paste the URL you copied in Step 3.
+**Upon successful deployment Heroku will give you the URL for your hosted app**
 
-```
-$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
-```
+### Building upon this project: <a name="building"></a>
 
-- Press Enter. Your local clone will be created.
+To get set up with a copy of my project you can do these multiple ways. 
 
-```
-$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
-> Cloning into `CI-Clone`...
-> remote: Counting objects: 10, done.
-> remote: Compressing objects: 100% (8/8), done.
-> remove: Total 10 (delta 1), reused 10 (delta 1)
-> Unpacking objects: 100% (10/10), done.
-```
+**Via GitHub** -  
+1. You can manually download locally to your machine and then upload to your preferred IDE. 
+2. Install the projects requirements.txt using `pip3 install -r requirements.txt`
+3. You will need to update a few environment variables before we can run the app.
+	1. `app.config["MONGO_DBNAME"] = "filament_review"`
+	2. `app.config["MONGO_URI"] = os.getenv("MONGO_URI", "monogodb://localhost")`
+	3. `app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")`
+4. Once the above steps are complete you can try run the application using `python3 app.py`
 
-Click [Here](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository#cloning-a-repository-to-github-desktop) to retrieve pictures for some of the buttons and more detailed explanations of the above process.
-
+**Via the CLI** -
+1. Clone my repo via Git using the following command `https://github.com/Gilleece/filament-review`
+2. Install the projects requirements.txt using `pip3 install -r requirements.txt`
+3. You will need to update a few environment variables before we can run the app.
+	1. `app.config["MONGO_DBNAME"] = "filament_review"`
+	2. `app.config["MONGO_URI"] = os.getenv("MONGO_URI", "monogodb://localhost")`
+	3. `app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")`
+4. Once the above steps are complete you can try run the application using `python3 app.py`
 
 ## Credits <a name="credits"></a>
 - Thanks to [Reuben Ferrante](https://github.com/arex18), my Code Institute mentor, for his guidance and insight.
 
-- Thanks to the Code Institute Slack community, it was a great resource for issues.
+- Text examples explaining each filament from www.simplify3d.com
 
-- Color scheme based suggests from Abobe Color.
+- Thanks to the Code Institute Slack community, it was a great resource for issues.
 
 - Bootstrap, particularly their great documentation.
 
 - W3Schools, for their fantastic explanations and useful examples.
 
-- The Movie DataBase, whose API made this possible. 
+- Flask form tutorial followed: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iii-web-forms
 
-- Scroll to top button credit to: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
-
-- Youtube trailer button functionality, credit to Jacob Lett: https://codepen.io/JacobLett/pen/xqpEYE
-
-- Language Codes, used to change api returned lang codes into language name for user readability. Sourced from, and credit to: https://gist.github.com/wpsmith/7604842
-
-- Scroll to top button credit to: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
-
-- Fade Ins and pulse from https://www.theappguruz.com/tag-tools/web/CSSAnimations/
-
-- FlickerAnimation, credit to: https://stackoverflow.com/questions/23985018/simple-css-animation-loop-fading-in-out-loading-text 
+- Letter style credit to: https://codepen.io/mlms13/pen/LKFoy
